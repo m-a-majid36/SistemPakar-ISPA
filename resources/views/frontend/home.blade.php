@@ -3,7 +3,7 @@
 @section('content')
     <!-- ======= Hero Section ======= -->
     <section id="hero" class="d-flex align-items-center"
-        style="background: url('{{ asset('frontend/images/hero-bg.jpg') }}') top center;">
+        style="background: url('{{ Storage::url($data->main_picture) }}'); background-repeat: no-repeat;">
         <div class="container">
             <h1>Sistem Pakar</h1>
             <h1>Diagnosa Penyakit ISPA</h1>
@@ -20,16 +20,8 @@
                 <div class="row">
                     <div class="col-lg-4 d-flex align-items-stretch">
                         <div class="content">
-                            <h3>Apa itu ISPA?</h3>
-                            <p style="text-align: justify">
-                                Infeksi saluran pernapasan akut atau ISPA adalah infeksi yang terjadi di saluran pernapasan,
-                                baik saluran pernapasan atas maupun bawah. Infeksi ini dapat menimbulkan gejala batuk,
-                                pilek, dan demam. ISPA sangat mudah menular dan dapat dialami oleh siapa saja, terutama
-                                anak-anak dan lansia.
-                            </p>
-                            {{-- <div class="text-center">
-                                <a href="#" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
-                            </div> --}}
+                            <h3>{{ $data->main_title }}</h3>
+                            <p style="text-align: justify">{{ $data->main_subtitle }}</p>
                         </div>
                     </div>
                     <div class="col-lg-8 d-flex align-items-stretch">
@@ -38,26 +30,23 @@
                                 <div class="col-xl-4 d-flex align-items-stretch">
                                     <div class="icon-box mt-4 mt-xl-0">
                                         <i class="fa-regular fa-handshake"></i>
-                                        <h4>Sistem Pakar Terpercaya</h4>
-                                        <p style="text-align: start">Diagnosa kesehatan dapat diakses dengan mudah di
-                                            website ini.</p>
+                                        <h4>{{ $data->title1 }}</h4>
+                                        <p style="text-align: start">{{ $data->subtitle1 }}</p>
                                     </div>
                                 </div>
                                 <div class="col-xl-4 d-flex align-items-stretch">
                                     <div class="icon-box mt-4 mt-xl-0">
                                         <i class="fa-solid fa-city"></i>
-                                        <h4>Kapan Saja, Di Mana Saja</h4>
-                                        <p style="text-align: start">Semua layanan di website selalu ada 24 jam untukmu dan
-                                            keluarga.</p>
+                                        <h4>{{ $data->title2 }}</h4>
+                                        <p style="text-align: start">{{ $data->subtitle2 }}</p>
                                     </div>
                                 </div>
                                 <div class="col-xl-4 d-flex align-items-stretch">
                                     <div class="icon-box mt-4 mt-xl-0">
                                         {{-- <i class="fa-solid fa-hands-holding-circle"></i> --}}
                                         <i class="fa-solid fa-shield-halved"></i>
-                                        <h4>Mudah, Aman & Nyaman</h4>
-                                        <p style="text-align: start">Layanan sistem pakar website siap penuhi kebutuhan
-                                            kesehatanmu setiap saat.</p>
+                                        <h4>{{ $data->title3 }}</h4>
+                                        <p style="text-align: start">{{ $data->subtitle3 }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -75,43 +64,39 @@
                 <div class="row">
                     <div
                         class="col-xl-5 col-lg-6 video-box d-flex justify-content-center align-items-stretch position-relative">
-                        <img src="{{ asset('frontend/images/img.png') }}" alt="second-hero">
+                        <img src="{{ Storage::url($data->second_picture) }}" alt="second-picture">
                     </div>
 
                     <div
                         class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5">
-                        <h3>Kebutuhan Sehatmu Hanya dengan Sentuhan Jari</h3>
-                        <p>Akses layanan diagnosa penyakit laptop maupun smartphone. Manjadi lebih mudah dan praktis.</p>
+                        <h3>{{ $data->second_title }}</h3>
+                        <p>{{ $data->second_subtitle }}</p>
 
                         <div class="icon-box">
                             <div class="icon">
-                                <img src="{{ asset('frontend/images/medical-team.png') }}" alt="medical_teams"
+                                <img src="{{ Storage::url($data->content1_picture) }}" alt="content1_picture"
                                     height="75">
                             </div>
-                            <h4 class="title"><a href="">Tenaga Medis Berpengalaman</a></h4>
-                            <p class="description">Sistem Pakar ini dikelola oleh beberapa tenaga medis berpengalaman di
-                                bidangnya.</p>
+                            <h4 class="title">{{ $data->content1_title }}</h4>
+                            <p class="description">{{ $data->content1_subtitle }}</p>
                         </div>
 
                         <div class="icon-box">
                             <div class="icon">
-                                <img src="{{ asset('frontend/images/doctor-male.png') }}" alt="doctor-man" height="75">
+                                <img src="{{ Storage::url($data->content2_picture) }}" alt="content2_picture"
+                                    height="75">
                             </div>
-                            <h4 class="title"><a href="">Dokter Pria</a></h4>
-                            <p class="description">
-                                Terdapat dokter pria yang dapat menjadikan konsultasi lebih nyaman dan privasi terjaga
-                            </p>
+                            <h4 class="title">{{ $data->content2_title }}</h4>
+                            <p class="description">{{ $data->content2_subtitle }}</p>
                         </div>
 
                         <div class="icon-box">
                             <div class="icon">
-                                <img src="{{ asset('frontend/images/doctor-female.png') }}" alt="doctor-woman"
+                                <img src="{{ Storage::url($data->content3_picture) }}" alt="content3_picture"
                                     height="75">
                             </div>
-                            <h4 class="title"><a href="">Dokter Wanita</a></h4>
-                            <p class="description">
-                                Terdapat dokter wanita yang dapat menjadikan konsultasi lebih nyaman dan privasi terjaga
-                            </p>
+                            <h4 class="title">{{ $data->content3_title }}</h4>
+                            <p class="description">{{ $data->content3_subtitle }}</p>
                         </div>
 
                     </div>

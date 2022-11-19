@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Frontend;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
     public function index()
     {
-        return view('auth.login');
+        $data = Frontend::whereId(1)->first();
+
+        return view('auth.login', compact('data'));
     }
 }
