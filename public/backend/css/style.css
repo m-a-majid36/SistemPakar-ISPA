@@ -9535,6 +9535,22 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
   color: #596A81;
   text-decoration: underline; }
 
+.login-background {
+  background: url('../../frontend/images/hero-bg.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh
+}
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+
 .login-input .form-group {
   margin-bottom: 30px; }
   .login-input .form-group label {

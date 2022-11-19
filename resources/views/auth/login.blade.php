@@ -13,7 +13,7 @@
     <link href="{{ asset('backend/css/style.css') }}" rel="stylesheet">
 </head>
 
-<body class="h-100">
+<body class="login-background">
     <!--Preloader start-->
     <div id="preloader">
         <div class="loader">
@@ -24,40 +24,33 @@
         </div>
     </div>
     <!--Preloader end-->
-
-    <div class="login-form-bg h-100">
-        <div class="container h-100">
-            <div class="row justify-content-center h-100" style="margin-top: 100px">
-                <div class="col-xl-6">
-                    <div class="form-input-content">
-                        <div class="card login-form mb-0">
-                            <div class="card-body pt-5">
-                                <a class="text-center" href="index.html">
-                                    <h2>Sistem Pakar ISPA</h2>
-                                    <h4>Login</h4>
-                                </a>
-
-                                <form class="mt-5 mb-5 login-input">
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" placeholder="Email">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control" placeholder="Password">
-                                    </div>
-                                    <button class="btn login-form__btn submit w-100">Sign In</button>
-                                </form>
-                                <p class="mt-5 login-form__footer">Dont have account? <a href="page-register.html"
-                                        class="text-primary">Sign Up</a> now</p>
-                            </div>
+    <div class="container">
+        <div class="row vertical-center justify-content-center">
+            <div class="col-xl-6">
+                <div class="form-input-content">
+                    <div class="card login-form mb-0">
+                        <div class="card-body pt-5">
+                            <a class="text-center" href="{{ route('home') }}">
+                                <h2>Sistem Pakar ISPA</h2>
+                            </a>
+                            <h4 class="text-center">Login</h4>
+                            <form class="mt-5 mb-5 login-input">
+                                <div class="form-group">
+                                    <input type="email" class="form-control" placeholder="Email">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" placeholder="Password">
+                                </div>
+                                <button class="btn login-form__btn submit w-100">Sign In</button>
+                            </form>
+                            <p class="mt-5 login-form__footer">Tidak memiliki akun? <a href="#"
+                                    class="text-primary">Daftar</a> sekarang</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
 
     <!--**********************************
         Scripts
@@ -66,4 +59,7 @@
     <script src="{{ asset('backend/js/custom.min.js') }}"></script>
     <script src="{{ asset('backend/js/settings.js') }}"></script>
     <script src="{{ asset('backend/js/gleek.js') }}"></script>
-    <script src="{{ asset('backend/js/styleSwitcher.js') }}"></scr
+    <script src="{{ asset('backend/js/styleSwitcher.js') }}"></script>
+</body>
+
+</html>
