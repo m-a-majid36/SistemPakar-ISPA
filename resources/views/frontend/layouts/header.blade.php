@@ -30,12 +30,12 @@
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link {{ Request::is('/consult') ? 'active' : '' }}" href="{{ route('consult') }}">
+                    <a class="nav-link {{ Request::is('consult*') ? 'active' : '' }}" href="{{ route('consult') }}">
                         Konsultasi
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link {{ Request::is('/info') ? 'active' : '' }}" href="{{ route('info') }}">
+                    <a class="nav-link {{ Request::is('info*') ? 'active' : '' }}" href="{{ route('info') }}">
                         Informasi Penyakit
                     </a>
                 </li>
@@ -43,7 +43,7 @@
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
 
-        <a href="#" class="appointment-btn"><span class="d-none d-md-inline">Masuk Panel</span></a>
+        <a href="{{ route('login') }}" class="appointment-btn"><span class="d-none d-md-inline">Masuk Panel</span></a>
 
     </div>
 </header><!-- End Header -->
