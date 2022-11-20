@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +19,37 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/home', function(){
+    if (Auth::user()->role == 'admin' || Auth::user()->role == 'dokter') {
+        return redirect('dashboard');
+    } else {return redirect('/');}});
 Route::get('/consult', [HomeController::class, 'consult'])->name('consult');
 Route::get('/info', [HomeController::class, 'info'])->name('info');
 
-Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
+// Guest Only
+Route::middleware('guest')->group(function() {
+    Route::get('login', [LoginController::class, 'index'])->name('login');
+    Route::post('login', [LoginController::class, 'authenticate'])->name('login.action');
+    Route::get('register', [RegisterController::class, 'index'])->name('register');
+    Route::post('register', [RegisterController::class, 'store'])->name('register.action');
+    Route::post('/getregencies', [RegisterController::class, 'get_regencies'])->name('get.regencies');
+    Route::post('/getdistricts', [RegisterController::class, 'get_districts'])->name('get.districts');
+    Route::post('/getvillages', [RegisterController::class, 'get_villages'])->name('get.villages');
+});
+
+Route::get('logout', function(){return redirect('/');});
+Route::post('logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
+
+Route::get('dashboard', [DashboardController::class, 'index'])->middleware('auth', 'role:admin,dokter')->name('dashboard');
+Route::prefix('dashboard')->middleware('auth')
+    ->group(function() {
+        Route::group(['middleware' => ['role:admin,dokter']], function() {
+
+        });
+        Route::group(['middleware' => ['role:admin']], function() {
+
+        });
+        Route::group(['middleware' => ['role:dokter']], function() {
+
+        });
+});

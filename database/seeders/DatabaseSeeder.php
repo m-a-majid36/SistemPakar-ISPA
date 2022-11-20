@@ -17,5 +17,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             FrontendSeeder::class
         ]);
+        $this->call(IndoRegionProvinceSeeder::class);
+        $this->call(IndoRegionRegencySeeder::class);
+        $this->call(IndoRegionDistrictSeeder::class);
+        $this->call(IndoRegionVillageSeeder::class);
     }
 }

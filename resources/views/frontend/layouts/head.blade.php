@@ -7,8 +7,8 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="{{ asset('frontend/images/doctors.png') }}" type="image/jpg">
-    <link href="{{ asset('frontend/images/medical-team.png') }}" type="image/jpg">
+    <link href="{{ asset('frontend/images/doctors.png') }}" type="image/png">
+    <link href="{{ asset('frontend/images/medical-team.png') }}" type="image/png">
 
     <!-- Google Fonts -->
     <link
