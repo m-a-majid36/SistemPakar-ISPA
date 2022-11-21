@@ -3,8 +3,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
-    <!-- theme meta -->
-    <meta name="theme-name" content="quixlab" />
+    @yield('meta')
 
     <title>Dashboard SP-ISPA | @yield('title')</title>
     <!-- Favicon icon -->
@@ -28,5 +27,7 @@
 
     <!-- Custom Stylesheet -->
     <link href="{{ asset('backend/css/style.css') }}" rel="stylesheet">
+
+    @yield('link')
 
 </head>

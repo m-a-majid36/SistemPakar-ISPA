@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\Mime\MessageConverter;
@@ -55,6 +56,14 @@ Route::prefix('dashboard')->middleware('auth')
             Route::put('/homesetting', [FrontendController::class, 'update'])->name('home.action');
 
             Route::resource('message', MessageController::class)->except(['create', 'store', 'show', 'edit', 'update']);
+
+            Route::resource('user', UserController::class);
+            Route::prefix('user')->group(function() {
+                Route::put('/reset/{user}', [UserController::class, 'reset'])->name('user.reset');
+                Route::post('/getregencies', [UserController::class, 'get_regencies'])->name('user.get.regencies');
+                Route::post('/getdistricts', [UserController::class, 'get_districts'])->name('user.get.districts');
+                Route::post('/getvillages', [UserController::class, 'get_villages'])->name('user.get.villages');
+            });
         });
         Route::group(['middleware' => ['role:dokter']], function() {
 

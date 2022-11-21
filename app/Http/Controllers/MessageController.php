@@ -48,9 +48,8 @@ class MessageController extends Controller
 
         if ($hasil) {
             return redirect()->back()->with('success', 'Pesanmu telah terkirim. Terimakasih!');
-        } else {
-            return redirect()->back()->with('error', 'Pesanmu gagal terkirim. Silahkan kirim ulang!');
         }
+        return redirect()->back()->with('error', 'Pesanmu gagal terkirim. Silahkan kirim ulang!');
     }
 
     /**
@@ -101,8 +100,7 @@ class MessageController extends Controller
 
         if ($hasil) {
             return redirect()->route('message.index')->with('success', 'Pesan berhasil dihapus!');
-        } else {
-            return redirect()->route('message.index')->with('error', 'Pesan gagal dihapus!');
         }
+        return redirect()->route('message.index')->with('error', 'Pesan gagal dihapus!');
     }
 }

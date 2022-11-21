@@ -84,8 +84,7 @@ class FrontendController extends Controller
 
         if ($hasil) {
             return redirect()->back()->with('success', 'Data Home berhasil diperbarui!');
-        } else {
-            return redirect()->back()->with('error', 'Data Home gagal diperbarui!');
         }
+        return redirect()->back()->with('error', 'Data Home gagal diperbarui!');
     }
 }

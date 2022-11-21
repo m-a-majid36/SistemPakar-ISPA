@@ -24,9 +24,9 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name'              => 'required|alpha',
+            'name'              => 'required',
             'username'          => 'required|unique:users',
-            'phone'             => 'required|unique:users|min:9|max:16',
+            'phone'             => 'required|unique:users|min:9|max:20',
             'gender'            => 'required',
             'address'           => 'required',
             'province'          => 'required',
@@ -43,10 +43,9 @@ class RegisterController extends Controller
 
         $hasil = User::create($validatedData);
         if ($hasil) {
-            return redirect('login')->with('success', 'Registrasi berhasil, silahkan login');
-        } else {
-            return redirect()->back()->with('error', 'Registrasi Gagal!');
+            return redirect()->route('login')->with('success', 'Registrasi berhasil, silahkan login');
         }
+        return redirect()->route('register')->with('error', 'Registrasi gagal, silahkan daftar lagi!');
     }
 
     public function get_regencies(Request $request)

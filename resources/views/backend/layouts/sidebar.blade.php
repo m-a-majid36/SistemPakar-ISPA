@@ -12,17 +12,17 @@
             </li>
             @if (Auth::user()->role == 'admin')
                 <li class="nav-label">Data Master</li>
-                <li>
+                <li class="{{ Request::is('dashboard/homesetting*') ? 'active' : '' }}">
                     <a href="{{ route('home.setting') }}" aria-expanded="false">
-                        <i class="icon-home menu-icon"></i><span class="nav-text">Home Setting</span>
+                        <i class="icon-home menu-icon"></i><span class="nav-text">Pengaturan Home</span>
                     </a>
                 </li>
-                <li>
-                    <a href="#" aria-expanded="false">
-                        <i class="icon-user menu-icon"></i><span class="nav-text">User Setting</span>
+                <li class="{{ Request::is('dashboard/user*') ? 'active' : '' }}">
+                    <a href="{{ route('user.index') }}" aria-expanded="false">
+                        <i class="icon-user menu-icon"></i><span class="nav-text">Pengaturan Pengguna</span>
                     </a>
                 </li>
-                <li>
+                <li class="{{ Request::is('dashboard/message*') ? 'active' : '' }}">
                     <a href="{{ route('message.index') }}" aria-expanded="false">
                         <i class="icon-speech menu-icon"></i><span class="nav-text">Pesan</span>
                     </a>

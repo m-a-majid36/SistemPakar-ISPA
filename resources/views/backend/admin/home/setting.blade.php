@@ -1,12 +1,12 @@
 @extends('backend.layouts.app')
-@section('title', 'Home Setting')
+@section('title', 'Data Home')
 @section('content')
     <!-- Breadcrumb -->
     <div class="row page-titles mx-0">
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active">Home Setting</li>
+                <li class="breadcrumb-item active">Pengaturan Home</li>
             </ol>
         </div>
     </div>
@@ -16,7 +16,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <h3>Home Setting</h3>
+                        <h3>Data Tampilan Home</h3>
                         <hr>
                         @if (session()->has('success'))
                             <div class="alert alert-success alert-dismissible fade show">

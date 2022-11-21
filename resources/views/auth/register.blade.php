@@ -12,9 +12,6 @@
 
     <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
     <link href="{{ asset('backend/css/style.css') }}" rel="stylesheet">
-
-    <!-- Toastr -->
-    <link href="{{ asset('backend/plugins/toastr/css/toastr.min.css') }}" rel="stylesheet">
 </head>
 
 <body
@@ -41,6 +38,19 @@
                                 <h2>Sistem Pakar ISPA</h2>
                             </a>
                             <h4 class="text-center">Registrasi</h4>
+                            @if (session()->has('success'))
+                                <div class="alert alert-success alert-dismissible fade show">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span>
+                                    </button><strong>Berhasil!</strong> {{ session('success') }}
+                                </div>
+                            @elseif (session()->has('error'))
+                                <div class="alert alert-danger alert-dismissible fade show">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span>
+                                    </button><strong>Gagal!</strong> {{ session('error') }}
+                                </div>
+                            @endif
                             <form class="basic-form mt-3" action="{{ route('register.action') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
@@ -56,9 +66,8 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="email">Email</label>
-                                        <input type="email" name="email" id="email" required
-                                            class="form-control @error('email') is-invalid @enderror"
-                                            placeholder="Email">
+                                        <input type="email" name="email" id="email" required placeholder="Email"
+                                            class="form-control @error('email') is-invalid @enderror">
                                         @error('email')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -66,9 +75,9 @@
                                     <div class="form-group col-md-6">
                                         <label for="username">Username</label>
                                         <input type="text" name="username" id="username" required
+                                            placeholder="username"
                                             oninput="this.value = this.value.replace(/[^0-9._a-z]/g, '');"
-                                            class="form-control @error('username') is-invalid @enderror"
-                                            placeholder="username">
+                                            class="form-control @error('username') is-invalid @enderror">
                                         @error('username')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -78,9 +87,9 @@
                                     <div class="form-group col-md-6">
                                         <label for="phone">Nomor Telepon</label>
                                         <input type="text" name="phone" id="phone" required
+                                            placeholder="Nomor Telepon" minlength="8" maxlength="20"
                                             oninput="this.value = this.value.replace(/[^0-9+()]/g, '').replace(/(\+.?)\+.*/g, '$1');"
-                                            class="form-control @error('phone') is-invalid @enderror"
-                                            placeholder="phone">
+                                            class="form-control @error('phone') is-invalid @enderror">
                                         @error('phone')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -267,57 +276,6 @@
             });
         });
     </script>
-
-    <!-- Toastr -->
-    <script src="{{ asset('backend/plugins/toastr/js/toastr.min.js') }}"></script>
-    <script src="{{ asset('backend/plugins/toastr/js/toastr.init.js') }}"></script>
-    @if (session()->has('success'))
-        <script type="text/javascript">
-            $(document).ready(function() {
-                toastr.success({{ session('success') }}, "Berhasil", {
-                    positionClass: "toast-bottom-right",
-                    timeOut: 5e3,
-                    closeButton: !0,
-                    debug: !1,
-                    newestOnTop: !0,
-                    progressBar: !0,
-                    preventDuplicates: !0,
-                    onclick: null,
-                    showDuration: "300",
-                    hideDuration: "1000",
-                    extendedTimeOut: "1000",
-                    showEasing: "swing",
-                    hideEasing: "linear",
-                    showMethod: "fadeIn",
-                    hideMethod: "fadeOut",
-                    tapToDismiss: !1
-                });
-            });
-        </script>
-    @elseif (session()->has('error'))
-        <script type="text/javascript">
-            $(document).ready(function() {
-                toastr.error({{ session('error') }}, "Gagal", {
-                    positionClass: "toast-bottom-right",
-                    timeOut: 5e3,
-                    closeButton: !0,
-                    debug: !1,
-                    newestOnTop: !0,
-                    progressBar: !0,
-                    preventDuplicates: !0,
-                    onclick: null,
-                    showDuration: "300",
-                    hideDuration: "1000",
-                    extendedTimeOut: "1000",
-                    showEasing: "swing",
-                    hideEasing: "linear",
-                    showMethod: "fadeIn",
-                    hideMethod: "fadeOut",
-                    tapToDismiss: !1
-                })
-            })
-        </script>
-    @endif
 </body>
 
 </html>
