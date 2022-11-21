@@ -124,38 +124,60 @@
             <div class="container">
                 <div class="section-title">
                     <h2>Kirimkan Pesan Anda</h2>
+                    @if (session()->has('success'))
+                        <div class="text-center">
+                            <div class="alert alert-success alert-dismissible fade show">
+                                {{ session('success') }}
+                            </div>
+                        </div>
+                    @elseif (session()->has('error'))
+                        <div class="text-center">
+                            <div class="alert alert-danger alert-dismissible fade show">
+                                {{ session('error') }}
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
 
             <div class="container">
                 <div class="row">
-                    <form action="#" method="post" role="form" class="php-email-form">
+                    <form action="{{ route('message.store') }}" method="POST" class="home-form">
+                        @csrf
                         <div class="row">
                             <div class="col-md-6 form-group">
-                                <input type="text" name="name" class="form-control" id="name" placeholder="Nama"
-                                    required>
+                                <input type="text" name="name" id="name" required placeholder="Nama"
+                                    value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                                @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="col-md-6 form-group mt-3 mt-md-0">
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Email"
-                                    required>
+                                <input type="email" name="email" id="email" required placeholder="Email"
+                                    value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror">
+                                @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="form-group mt-3">
-                            <input type="text" class="form-control" name="title" id="title" placeholder="Subjek"
-                                required>
+                            <input type="text" name="subject" id="subject" required placeholder="Subjek"
+                                value="{{ old('subject') }}" class="form-control @error('subject') is-invalid @enderror">
+                            @error('subject')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group mt-3">
-                            <textarea class="form-control" name="message" rows="5" placeholder="Pesan" required></textarea>
+                            <textarea name="message" id="message" rows="5" placeholder="Pesan" required
+                                class="form-control @error('message') is-invalid @enderror">{{ old('message') }}</textarea>
+                            @error('message')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
-                        <div class="my-3">
-                            <div class="loading">Loading</div>
-                            <div class="error-message"></div>
-                            <div class="sent-message">Your message has been sent. Thank you!</div>
+                        <div class="text-center">
+                            <button type="submit" class="btn">Kirim Pesan</button>
                         </div>
-                        <div class="text-center"><button type="submit">Kirim Pesan</button></div>
                     </form>
-
-
                 </div>
 
             </div>

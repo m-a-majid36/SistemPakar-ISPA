@@ -9535,6 +9535,12 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
   color: #596A81;
   text-decoration: underline; }
 
+.login-background {
+  background-position: center; background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh
+}
+
 .vertical-center {
   min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
   min-height: 100vh; /* These two lines are counted as one :-)       */
@@ -9963,11 +9969,7 @@ Input Style
       transition: all 0.3s ease-in-out;
       float: right; }
   .drop-menu.active {
-    border-radius: 5px 5px 0 0; }
-    .drop-menu.active:hover {
-      border-radius: 5px 5px 0 0; }
-    .drop-menu.active .select i {
-      -webkit-transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
       transform: rotate(180deg); }
   .drop-menu .dropeddown {
     position: absolute;

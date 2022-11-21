@@ -44,7 +44,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <input type="text" name="login" id="login" placeholder="Email/Username"
-                                        required class="form-control @error('login') is-invalid @enderror">
+                                        autofocus required class="form-control @error('login') is-invalid @enderror">
                                     @error('login')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror

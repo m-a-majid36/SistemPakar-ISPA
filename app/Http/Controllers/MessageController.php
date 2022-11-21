@@ -14,7 +14,9 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.admin.message.index', [
+            "messages"  => Message::latest()->get(),
+        ]);
     }
 
     /**
@@ -35,7 +37,20 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name'      => 'required',
+            'email'     => 'required|email',
+            'subject'   => 'required',
+            'message'   => 'required',
+        ]);
+
+        $hasil = Message::create($validatedData);
+
+        if ($hasil) {
+            return redirect()->back()->with('success', 'Pesanmu telah terkirim. Terimakasih!');
+        } else {
+            return redirect()->back()->with('error', 'Pesanmu gagal terkirim. Silahkan kirim ulang!');
+        }
     }
 
     /**
@@ -78,8 +93,16 @@ class MessageController extends Controller
      * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Message $message)
+    public function destroy($message)
     {
-        //
+        $data = Message::findorFail($message);
+
+        $hasil = $data->delete();
+
+        if ($hasil) {
+            return redirect()->route('message.index')->with('success', 'Pesan berhasil dihapus!');
+        } else {
+            return redirect()->route('message.index')->with('error', 'Pesan gagal dihapus!');
+        }
     }
 }

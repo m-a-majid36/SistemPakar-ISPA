@@ -1,11 +1,14 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\Mime\MessageConverter;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +28,7 @@ Route::get('/home', function(){
     } else {return redirect('/');}});
 Route::get('/consult', [HomeController::class, 'consult'])->name('consult');
 Route::get('/info', [HomeController::class, 'info'])->name('info');
+Route::post('/message', [MessageController::class, 'store'])->name('message.store');
 
 // Guest Only
 Route::middleware('guest')->group(function() {
@@ -37,17 +41,20 @@ Route::middleware('guest')->group(function() {
     Route::post('/getvillages', [RegisterController::class, 'get_villages'])->name('get.villages');
 });
 
-Route::get('logout', function(){return redirect('/');});
-Route::post('logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
+Route::get('logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
 
 Route::get('dashboard', [DashboardController::class, 'index'])->middleware('auth', 'role:admin,dokter')->name('dashboard');
 Route::prefix('dashboard')->middleware('auth')
     ->group(function() {
         Route::group(['middleware' => ['role:admin,dokter']], function() {
-
+            Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
+            Route::put('/profile', [DashboardController::class, 'profile_update'])->name('profile.update');
         });
         Route::group(['middleware' => ['role:admin']], function() {
+            Route::get('/homesetting', [FrontendController::class, 'index'])->name('home.setting');
+            Route::put('/homesetting', [FrontendController::class, 'update'])->name('home.action');
 
+            Route::resource('message', MessageController::class)->except(['create', 'store', 'show', 'edit', 'update']);
         });
         Route::group(['middleware' => ['role:dokter']], function() {
 

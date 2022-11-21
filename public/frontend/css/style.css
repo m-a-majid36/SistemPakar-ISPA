@@ -1025,17 +1025,17 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Appointments
+# Home form
 --------------------------------------------------------------*/
-.appointment .php-email-form {
+.home-form {
   width: 100%;
 }
 
-.appointment .php-email-form .form-group {
+.home-form .form-group {
   padding-bottom: 8px;
 }
 
-.appointment .php-email-form .validate {
+.home-form .validate {
   display: none;
   color: red;
   margin: 0 0 15px 0;
@@ -1043,7 +1043,7 @@ section {
   font-size: 13px;
 }
 
-.appointment .php-email-form .error-message {
+.home-form .error-message {
   display: none;
   color: #fff;
   background: #ed3c0d;
@@ -1052,11 +1052,11 @@ section {
   font-weight: 600;
 }
 
-.appointment .php-email-form .error-message br+br {
+.home-form .error-message br+br {
   margin-top: 25px;
 }
 
-.appointment .php-email-form .sent-message {
+.home-form .sent-message {
   display: none;
   color: #fff;
   background: #18d26e;
@@ -1065,14 +1065,14 @@ section {
   font-weight: 600;
 }
 
-.appointment .php-email-form .loading {
+.home-form .loading {
   display: none;
   background: #fff;
   text-align: center;
   padding: 15px;
 }
 
-.appointment .php-email-form .loading:before {
+.home-form .loading:before {
   content: "";
   display: inline-block;
   border-radius: 50%;
@@ -1085,31 +1085,31 @@ section {
   animation: animate-loading 1s linear infinite;
 }
 
-.appointment .php-email-form input,
-.appointment .php-email-form textarea,
-.appointment .php-email-form select {
+.home-form input,
+.home-form textarea,
+.home-form select {
   border-radius: 0;
   box-shadow: none;
   font-size: 14px;
   padding: 10px !important;
 }
 
-.appointment .php-email-form input:focus,
-.appointment .php-email-form textarea:focus,
-.appointment .php-email-form select:focus {
+.home-form input:focus,
+.home-form textarea:focus,
+.home-form select:focus {
   border-color: #1977cc;
 }
 
-.appointment .php-email-form input,
-.appointment .php-email-form select {
+.home-form input,
+.home-form select {
   height: 44px;
 }
 
-.appointment .php-email-form textarea {
+.home-form textarea {
   padding: 10px 12px;
 }
 
-.appointment .php-email-form button[type=submit] {
+.home-form button[type=submit] {
   background: #1977cc;
   border: 0;
   padding: 10px 35px;
@@ -1118,7 +1118,7 @@ section {
   border-radius: 50px;
 }
 
-.appointment .php-email-form button[type=submit]:hover {
+.home-form button[type=submit]:hover {
   background: #1c84e3;
 }
 
