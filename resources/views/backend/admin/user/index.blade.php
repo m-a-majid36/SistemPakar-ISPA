@@ -1,5 +1,8 @@
 @extends('backend.layouts.app')
 @section('title', 'Pengguna')
+@section('link')
+    <link rel="stylesheet" href="{{ asset('backend/plugins/toastr/css/toastr.min.css') }}">
+@endsection
 @section('content')
     <!-- Breadcrumb -->
     <div class="row page-titles mx-0">
@@ -20,19 +23,6 @@
                         <a href="{{ route('user.create') }}" class="btn btn-success text-white"><i
                                 class="icon-user-follow"></i>&nbsp; Tambah Pengguna</a>
                         <hr>
-                        @if (session()->has('success'))
-                            <div class="alert alert-success alert-dismissible fade show">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                        aria-hidden="true">&times;</span>
-                                </button><strong>Berhasil!</strong> {{ session('success') }}
-                            </div>
-                        @elseif (session()->has('error'))
-                            <div class="alert alert-danger alert-dismissible fade show">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                        aria-hidden="true">&times;</span>
-                                </button><strong>Gagal!</strong> {{ session('error') }}
-                            </div>
-                        @endif
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered zero-configuration">
                                 <thead>
@@ -100,4 +90,13 @@
     <script src="{{ asset('backend/plugins/tables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('backend/plugins/tables/js/datatable/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('backend/plugins/tables/js/datatable-init/datatable-basic.min.js') }}"></script>
+    <script src="{{ asset('backend/plugins/toastr/js/toastr.min.js') }}"></script>
+    <script src="{{ asset('backend/plugins/toastr/js/toastr.init.js') }}"></script>
+    <script>
+        @if (Session::has('success'))
+            toastr.success("{{ Session::get('success') }}")
+        @elseif (Session::has('error'))
+            toastr.error("{{ Session::get('error') }}")
+        @endif
+    </script>
 @endsection

@@ -9,6 +9,10 @@
     <!-- Favicon icon -->
     <link href="{{ asset('frontend/images/doctors.png') }}" type="image/png">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.css"
+        integrity="sha512-oe8OpYjBaDWPt2VmSFR+qYOdnTjeV9QPLJUeqZyprDEQvQLJ9C5PCFclxwNuvb/GQgQngdCXzKSFltuHD3eCxA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
     <link href="{{ asset('backend/css/style.css') }}" rel="stylesheet">
 </head>
@@ -37,19 +41,6 @@
                                 <h2>Sistem Pakar ISPA</h2>
                             </a>
                             <h4 class="text-center">Login</h4>
-                            @if (session()->has('success'))
-                                <div class="alert alert-success alert-dismissible fade show">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                            aria-hidden="true">&times;</span>
-                                    </button><strong>Berhasil!</strong> {{ session('success') }}
-                                </div>
-                            @elseif (session()->has('error'))
-                                <div class="alert alert-danger alert-dismissible fade show">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                            aria-hidden="true">&times;</span>
-                                    </button><strong>Gagal!</strong> {{ session('error') }}
-                                </div>
-                            @endif
                             <form class="mb-5 login-input" method="POST" action="{{ route('login.action') }}">
                                 @csrf
                                 <div class="form-group">
@@ -85,6 +76,20 @@
     <script src="{{ asset('backend/js/settings.js') }}"></script>
     <script src="{{ asset('backend/js/gleek.js') }}"></script>
     <script src="{{ asset('backend/js/styleSwitcher.js') }}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"
+        integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        @if (Session::has('success'))
+            toastr.success("{{ Session::get('success') }}")
+        @elseif (Session::has('error'))
+            toastr.error("{{ Session::get('error') }}")
+        @endif
+    </script>
 </body>
 
 </html>

@@ -1,5 +1,8 @@
 @extends('backend.layouts.app')
 @section('title', 'Data Home')
+@section('link')
+    <link rel="stylesheet" href="{{ asset('backend/plugins/toastr/css/toastr.min.css') }}">
+@endsection
 @section('content')
     <!-- Breadcrumb -->
     <div class="row page-titles mx-0">
@@ -18,19 +21,6 @@
                     <div class="card-body">
                         <h3>Data Tampilan Home</h3>
                         <hr>
-                        @if (session()->has('success'))
-                            <div class="alert alert-success alert-dismissible fade show">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                        aria-hidden="true">&times;</span>
-                                </button><strong>Berhasil!</strong> {{ session('success') }}
-                            </div>
-                        @elseif (session()->has('error'))
-                            <div class="alert alert-danger alert-dismissible fade show">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                        aria-hidden="true">&times;</span>
-                                </button><strong>Gagal!</strong> {{ session('error') }}
-                            </div>
-                        @endif
                         <div class="basic-form">
                             <form action="{{ route('home.action') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
@@ -375,6 +365,15 @@
     </div>
 @endsection
 @section('script')
+    <script src="{{ asset('backend/plugins/toastr/js/toastr.min.js') }}"></script>
+    <script src="{{ asset('backend/plugins/toastr/js/toastr.init.js') }}"></script>
+    <script>
+        @if (Session::has('success'))
+            toastr.success("{{ Session::get('success') }}")
+        @elseif (Session::has('error'))
+            toastr.error("{{ Session::get('error') }}")
+        @endif
+    </script>
     <script>
         function previewmain_picture() {
             const main_picture = document.querySelector('#main_picture');

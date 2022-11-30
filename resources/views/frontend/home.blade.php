@@ -1,5 +1,10 @@
 @extends('frontend.layouts.app')
 @section('title', 'Home')
+@section('link')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.css"
+        integrity="sha512-oe8OpYjBaDWPt2VmSFR+qYOdnTjeV9QPLJUeqZyprDEQvQLJ9C5PCFclxwNuvb/GQgQngdCXzKSFltuHD3eCxA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+@endsection
 @section('content')
     <!-- ======= Hero Section ======= -->
     <section id="hero" class="d-flex align-items-center"
@@ -124,19 +129,6 @@
             <div class="container">
                 <div class="section-title">
                     <h2>Kirimkan Pesan Anda</h2>
-                    @if (session()->has('success'))
-                        <div class="text-center">
-                            <div class="alert alert-success alert-dismissible fade show">
-                                {{ session('success') }}
-                            </div>
-                        </div>
-                    @elseif (session()->has('error'))
-                        <div class="text-center">
-                            <div class="alert alert-danger alert-dismissible fade show">
-                                {{ session('error') }}
-                            </div>
-                        </div>
-                    @endif
                 </div>
             </div>
 
@@ -184,4 +176,16 @@
         </section><!-- End Contact Section -->
 
     </main><!-- End #main -->
+@endsection
+@section('script')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"
+        integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        @if (Session::has('success'))
+            toastr.success("{{ Session::get('success') }}")
+        @elseif (Session::has('error'))
+            toastr.error("{{ Session::get('error') }}")
+        @endif
+    </script>
 @endsection

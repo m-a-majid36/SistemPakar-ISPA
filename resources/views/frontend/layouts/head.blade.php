@@ -5,6 +5,7 @@
     <title>Sistem Pakar ISPA | @yield('title')</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
+    @yield('meta')
 
     <!-- Favicons -->
     <link rel="shortcut icon" type="image/jpg" href="{{ url('frontend/images/doctors.png') }}" />
@@ -24,6 +25,7 @@
     <link href="{{ asset('frontend/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
+    @yield('link')
     <!-- Template Main CSS File -->
     <link href="{{ asset('frontend/css/style.css') }}" rel="stylesheet">
 
