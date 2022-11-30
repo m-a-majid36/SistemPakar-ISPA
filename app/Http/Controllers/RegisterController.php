@@ -29,10 +29,10 @@ class RegisterController extends Controller
             'phone'             => 'required|unique:users|min:9|max:20',
             'gender'            => 'required',
             'address'           => 'required',
-            'province'          => 'required',
-            'regency'           => 'required',
-            'district'          => 'required',
-            'village'           => 'required',
+            'province_id'       => 'required',
+            'regency_id'        => 'required',
+            'district_id'       => 'required',
+            'village_id'        => 'required',
             'email'             => 'required|email:dns|unique:users',
             'password'          => 'required|min:8|max:255',
             'password-confirm'  => 'required|same:password',
@@ -42,10 +42,12 @@ class RegisterController extends Controller
         $validatedData['password']  = Hash::make($validatedData['password']);
 
         $hasil = User::create($validatedData);
+
         if ($hasil) {
             return redirect()->route('login')->with('success', 'Registrasi berhasil, silahkan login');
         }
-        return redirect()->route('register')->with('error', 'Registrasi gagal, silahkan daftar lagi!');
+        return back()->with('error', 'Login gagal!');
+        
     }
 
     public function get_regencies(Request $request)

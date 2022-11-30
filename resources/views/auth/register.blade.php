@@ -56,7 +56,7 @@
                                 <div class="form-group">
                                     <label for="name">Nama Lengkap</label>
                                     <input type="text" name="name" id="name" required
-                                        placeholder="Nama Lengkap"
+                                        placeholder="Nama Lengkap" value="{{ old('name') }}"
                                         oninput="this.value = this.value.replace(/[^a-z A-Z]/g, '');"
                                         class="form-control @error('name') is-invalid @enderror">
                                     @error('name')
@@ -67,7 +67,8 @@
                                     <div class="form-group col-md-6">
                                         <label for="email">Email</label>
                                         <input type="email" name="email" id="email" required placeholder="Email"
-                                            class="form-control @error('email') is-invalid @enderror">
+                                            class="form-control @error('email') is-invalid @enderror"
+                                            value="{{ old('email') }}">
                                         @error('email')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -75,7 +76,7 @@
                                     <div class="form-group col-md-6">
                                         <label for="username">Username</label>
                                         <input type="text" name="username" id="username" required
-                                            placeholder="username"
+                                            placeholder="username" value="{{ old('username') }}"
                                             oninput="this.value = this.value.replace(/[^0-9._a-z]/g, '');"
                                             class="form-control @error('username') is-invalid @enderror">
                                         @error('username')
@@ -88,6 +89,7 @@
                                         <label for="phone">Nomor Telepon</label>
                                         <input type="text" name="phone" id="phone" required
                                             placeholder="Nomor Telepon" minlength="8" maxlength="20"
+                                            value="{{ old('phone') }}"
                                             oninput="this.value = this.value.replace(/[^0-9+()]/g, '').replace(/(\+.?)\+.*/g, '$1');"
                                             class="form-control @error('phone') is-invalid @enderror">
                                         @error('phone')
@@ -99,8 +101,10 @@
                                         <select name="gender" id="gender"
                                             class="form-control @error('gender') is-invalid @enderror">
                                             <option selected disabled>Pilih...</option>
-                                            <option value="L">Laki-Laki</option>
-                                            <option value="P">Perempuan</option>
+                                            <option value="L" {{ old('gender') == 'L' ? 'selected' : '' }}>
+                                                Laki-Laki</option>
+                                            <option value="P" {{ old('gender') == 'P' ? 'selected' : '' }}>
+                                                Perempuan</option>
                                         </select>
                                         @error('gender')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -112,51 +116,52 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label for="province">Provinsi</label>
-                                        <select name="province" id="province" required
-                                            class="form-control @error('province') is-invalid @enderror">
+                                        <label for="province_id">Provinsi</label>
+                                        <select name="province_id" id="province_id" required
+                                            class="form-control @error('province_id') is-invalid @enderror">
                                             <option selected disabled>Pilih Provinsi...</option>
-                                            @foreach ($provinces as $province)
-                                                <option value="{{ $province->id }}">{{ $province->name }}</option>
+                                            @foreach ($provinces as $province_id)
+                                                <option value="{{ $province_id->id }}">{{ $province_id->name }}
+                                                </option>
                                             @endforeach
                                         </select>
-                                        @error('province')
+                                        @error('province_id')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="regency">Kota/Kabupaten</label>
-                                        <select name="regency" id="regency" required
-                                            class="form-control @error('regency') is-invalid @enderror">
+                                        <label for="regency_id">Kota/Kabupaten</label>
+                                        <select name="regency_id" id="regency_id" required
+                                            class="form-control @error('regency_id') is-invalid @enderror">
                                         </select>
-                                        @error('regency')
+                                        @error('regency_id')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label for="district">Kecamatan</label>
-                                        <select name="district" id="district" required
-                                            class="form-control @error('district') is-invalid @enderror">
+                                        <label for="district_id">Kecamatan</label>
+                                        <select name="district_id" id="district_id" required
+                                            class="form-control @error('district_id') is-invalid @enderror">
                                         </select>
-                                        @error('district')
+                                        @error('district_id')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="village">Kelurahan/Desa</label>
-                                        <select name="village" id="village" required
-                                            class="form-control @error('village') is-invalid @enderror">
+                                        <label for="village_id">Kelurahan/Desa</label>
+                                        <select name="village_id" id="village_id" required
+                                            class="form-control @error('village_id') is-invalid @enderror">
                                         </select>
-                                        @error('village')
+                                        @error('village_id')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="address">Detail Alamat (Jl. No. RT/RW)</label>
-                                    <textarea name="address" id="address" required class="form-control @error('address') is-invalid @enderror"></textarea>
+                                    <textarea name="address" id="address" required class="form-control @error('address') is-invalid @enderror">{{ old('address') }}</textarea>
                                     @error('address')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -213,8 +218,8 @@
             });
 
             $(function() {
-                $('#province').on('change', function() {
-                    let id_province = $('#province').val();
+                $('#province_id').on('change', function() {
+                    let id_province = $('#province_id').val();
 
                     $.ajax({
                         type: 'POST',
@@ -225,17 +230,17 @@
                         cache: false,
 
                         success: function(msg) {
-                            $('#regency').html(msg);
-                            $('#district').html('');
-                            $('#village').html('');
+                            $('#regency_id').html(msg);
+                            $('#district_id').html('');
+                            $('#village_id').html('');
                         },
                         error: function(data) {
                             console.log('error:', data);
                         },
                     });
                 });
-                $('#regency').on('change', function() {
-                    let id_regency = $('#regency').val();
+                $('#regency_id').on('change', function() {
+                    let id_regency = $('#regency_id').val();
 
                     $.ajax({
                         type: 'POST',
@@ -246,16 +251,16 @@
                         cache: false,
 
                         success: function(msg) {
-                            $('#district').html(msg);
-                            $('#village').html('');
+                            $('#district_id').html(msg);
+                            $('#village_id').html('');
                         },
                         error: function(data) {
                             console.log('error:', data);
                         },
                     });
                 });
-                $('#district').on('change', function() {
-                    let id_district = $('#district').val();
+                $('#district_id').on('change', function() {
+                    let id_district = $('#district_id').val();
 
                     $.ajax({
                         type: 'POST',
@@ -266,7 +271,7 @@
                         cache: false,
 
                         success: function(msg) {
-                            $('#village').html(msg);
+                            $('#village_id').html(msg);
                         },
                         error: function(data) {
                             console.log('error:', data);

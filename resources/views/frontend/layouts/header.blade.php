@@ -6,10 +6,18 @@
             <i class="bi bi-phone"></i>{{ $data->phone }}
         </div>
         <div class="d-none d-lg-flex social-links align-items-center">
-            <a href="{{ $data->twitter }}" class="twitter"><i class="bi bi-twitter"></i></a>
-            <a href="{{ $data->facebook }}" class="facebook"><i class="bi bi-facebook"></i></a>
-            <a href="{{ $data->instagram }}" class="instagram"><i class="bi bi-instagram"></i></a>
-            <a href="{{ $data->linkedin }}" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            @if ($data->twitter)
+                <a href="{{ $data->twitter }}" class="twitter"><i class="bi bi-twitter"></i></a>
+            @endif
+            @if ($data->facebook)
+                <a href="{{ $data->facebook }}" class="facebook"><i class="bi bi-facebook"></i></a>
+            @endif
+            @if ($data->instagram)
+                <a href="{{ $data->instagram }}" class="instagram"><i class="bi bi-instagram"></i></a>
+            @endif
+            @if ($data->linkedin)
+                <a href="{{ $data->linkedin }}" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            @endif
         </div>
     </div>
 </div>
@@ -39,11 +47,26 @@
                         Informasi Penyakit
                     </a>
                 </li>
+                <li class="dropdown"><a href="#"><span>Menu</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        @if (Auth::user())
+                            <li>
+                                <a href="{{ route('profile') }}"><span>Profile</span></a>
+                            </li>
+                            <li>
+                                <a href="{{ route('logout') }}"><span>Logout</span></a>
+                            </li>
+                        @endif
+                    </ul>
+                </li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
 
-        <a href="{{ route('login') }}" class="appointment-btn"><span class="d-none d-md-inline">Masuk Panel</span></a>
+        @if (!Auth::user())
+            <a href="{{ route('login') }}" class="appointment-btn"><span class="d-none d-md-inline">Masuk
+                    Panel</span></a>
+        @endif
 
     </div>
 </header><!-- End Header -->
