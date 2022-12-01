@@ -47,25 +47,27 @@
                         Informasi Penyakit
                     </a>
                 </li>
-                <li class="dropdown"><a href="#"><span>Menu</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul>
-                        @if (Auth::user())
+                @if (Auth::user())
+                    <li class="dropdown"><a href="#" class="appointment-btn text-white"
+                            style="margin: 0px; padding: 5px 10px;"><span>Menu</span>
+                            <i class="bi bi-chevron-down"></i></a>
+                        <ul>
                             <li>
                                 <a href="{{ route('profile') }}"><span>Profile</span></a>
                             </li>
                             <li>
                                 <a href="{{ route('logout') }}"><span>Logout</span></a>
                             </li>
-                        @endif
-                    </ul>
-                </li>
+                        </ul>
+                    </li>
+                @endif
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
 
         @if (!Auth::user())
-            <a href="{{ route('login') }}" class="appointment-btn"><span class="d-none d-md-inline">Masuk
-                    Panel</span></a>
+            <a href="{{ route('login') }}" class="appointment-btn text-white"><span
+                    class="d-none d-md-inline">Login</span></a>
         @endif
 
     </div>
