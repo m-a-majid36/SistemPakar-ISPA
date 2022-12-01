@@ -27,10 +27,10 @@
                         <i class="icon-speech menu-icon"></i><span class="nav-text">Pesan</span>
                     </a>
                 </li>
-            @else
+            @elseif (Auth::user()->role == 'dokter')
                 <li class="nav-label">Data Master</li>
-                <li>
-                    <a href="#" aria-expanded="false">
+                <li class="{{ Request::is('dashboard/disease*') ? 'active' : '' }}">
+                    <a href="{{ route('disease.index') }}" aria-expanded="false">
                         <i class="icon-list menu-icon"></i><span class="nav-text">Gejala</span>
                     </a>
                 </li>

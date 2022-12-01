@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DiseaseController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -50,6 +51,7 @@ Route::prefix('dashboard')->middleware('auth')
         Route::group(['middleware' => ['role:admin,dokter']], function() {
             Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
             Route::put('/profile', [DashboardController::class, 'profile_update'])->name('profile.update');
+            Route::resource('disease', DiseaseController::class);
         });
         Route::group(['middleware' => ['role:admin']], function() {
             Route::get('/homesetting', [FrontendController::class, 'index'])->name('home.setting');

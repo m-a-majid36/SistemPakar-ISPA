@@ -14,7 +14,9 @@ class DiseaseController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.doctor.disease.index', [
+            "diseases" => Disease::all(),
+        ]);
     }
 
     /**
@@ -24,7 +26,7 @@ class DiseaseController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.doctor.disease.create');
     }
 
     /**
@@ -55,9 +57,11 @@ class DiseaseController extends Controller
      * @param  \App\Models\disease  $disease
      * @return \Illuminate\Http\Response
      */
-    public function edit(disease $disease)
+    public function edit($disease)
     {
-        //
+        return view('backend.doctor.disease.edit', [
+            "disease"   => Disease::findorFail($disease),
+        ]);
     }
 
     /**
@@ -78,8 +82,15 @@ class DiseaseController extends Controller
      * @param  \App\Models\disease  $disease
      * @return \Illuminate\Http\Response
      */
-    public function destroy(disease $disease)
+    public function destroy($disease)
     {
-        //
+        $data = Disease::findorFail($disease);
+
+        $hasil = $data->delete();
+
+        if ($hasil) {
+            return redirect()->route('disease.index')->with('success', 'Data gejala berhasil dihapus!');
+        }
+        return redirect()->route('disease.index')->with('error', 'Data gejala gagal dihapus!');
     }
 }
