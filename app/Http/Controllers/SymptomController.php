@@ -14,7 +14,9 @@ class SymptomController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.doctor.symptom.index', [
+            "symptoms"  => Symptom::all(),
+        ]);
     }
 
     /**
@@ -24,7 +26,7 @@ class SymptomController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.doctor.symptom.create');
     }
 
     /**
@@ -35,7 +37,17 @@ class SymptomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name'          =>'required',
+            'description'   => 'required'
+        ]);
+
+        $hasil = Symptom::create($validatedData);
+
+        if ($hasil) {
+            return redirect()->route('symptom.index')->with('success', 'Data penyakit berhasil ditambahkan!');
+        }
+        return redirect()->route('symptom.index')->with('error', 'Data penyakit gagal ditambahkan!');
     }
 
     /**
@@ -55,9 +67,11 @@ class SymptomController extends Controller
      * @param  \App\Models\symptom  $symptom
      * @return \Illuminate\Http\Response
      */
-    public function edit(symptom $symptom)
+    public function edit($symptom)
     {
-        //
+        return view('backend.doctor.symptom.edit', [
+            "symptom"   => Symptom::findorFail($symptom),
+        ]);
     }
 
     /**
@@ -78,8 +92,15 @@ class SymptomController extends Controller
      * @param  \App\Models\symptom  $symptom
      * @return \Illuminate\Http\Response
      */
-    public function destroy(symptom $symptom)
+    public function destroy($symptom)
     {
-        //
+        $data = Symptom::findorFail($symptom);
+
+        $hasil = $data->delete();
+
+        if ($hasil) {
+            return redirect()->route('symptom.index')->with('success', 'Data penyakit berhasil dihapus!');
+        }
+        return redirect()->route('symptom.index')->with('error', 'Data penyakit gagal dihapus!');
     }
 }

@@ -52,9 +52,15 @@
                             style="margin: 0px; padding: 5px 10px;"><span>Menu</span>
                             <i class="bi bi-chevron-down"></i></a>
                         <ul>
-                            <li>
-                                <a href="{{ route('profile') }}"><span>Profile</span></a>
-                            </li>
+                            @if (Auth::user()->role == 'admin' || Auth::user()->role == 'dokter')
+                                <li>
+                                    <a href="{{ route('dashboard') }}"><span>Dashboard</span></a>
+                                </li>
+                            @elseif (Auth::user()->role == 'pasien')
+                                <li>
+                                    <a href="{{ route('profile') }}"><span>Profile</span></a>
+                                </li>
+                            @endif
                             <li>
                                 <a href="{{ route('logout') }}"><span>Logout</span></a>
                             </li>

@@ -1,5 +1,5 @@
 <!-- ======= Footer ======= -->
-<footer id="footer">
+<footer id="footer" style=" position: fixed; bottom: 0; width: 100%;">
     <div class="container d-md-flex py-4">
         <div class="me-md-auto text-center text-md-start">
             <div class="copyright">

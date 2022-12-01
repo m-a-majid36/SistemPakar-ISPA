@@ -7556,7 +7556,10 @@ sub {
 
 .footer {
   padding-left: 15.1875rem;
-  background-color: #fff; }
+  background-color: #fff;
+  position: fixed;
+  bottom: 0;
+  width: 100%; }
   .footer .copyright {
     padding: 0.9375rem;
     background: white; }
@@ -8132,7 +8135,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
 .content-body {
   margin-left: 15.1875rem;
   z-index: 0; }
-  @media only screen and (min-width: 1200px) and (max-width: 1350px) {
+  @media only screen and (min-width: 100vh) and (max-width: 1350px) {
     .content-body {
       margin-left: 14.375rem; } }
 

@@ -34,8 +34,8 @@
                         <i class="icon-list menu-icon"></i><span class="nav-text">Gejala</span>
                     </a>
                 </li>
-                <li>
-                    <a href="#" aria-expanded="false">
+                <li class="{{ Request::is('dashboard/symptom*') ? 'active' : '' }}">
+                    <a href="{{ route('symptom.index') }}" aria-expanded="false">
                         <i class="icon-notebook menu-icon"></i><span class="nav-text">Penyakit</span>
                     </a>
                 </li>

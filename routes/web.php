@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SymptomController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -52,6 +53,7 @@ Route::prefix('dashboard')->middleware('auth')
             Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
             Route::put('/profile', [DashboardController::class, 'profile_update'])->name('profile.update');
             Route::resource('disease', DiseaseController::class);
+            Route::resource('symptom', SymptomController::class);
         });
         Route::group(['middleware' => ['role:admin']], function() {
             Route::get('/homesetting', [FrontendController::class, 'index'])->name('home.setting');

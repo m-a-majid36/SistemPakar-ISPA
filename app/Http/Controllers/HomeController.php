@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Frontend;
+use App\Models\Symptom;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,7 +25,8 @@ class HomeController extends Controller
     public function info()
     {
         $data = Frontend::whereId(1)->first();
+        $symptoms = Symptom::all();
 
-        return view('frontend.info', compact('data'));
+        return view('frontend.info', compact('data', 'symptoms'));
     }
 }

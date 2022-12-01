@@ -20,9 +20,21 @@
 
         <section class="inner-page">
             <div class="container">
-                <p>
-                    Isi
-                </p>
+                <div class="section-title">
+                    <h2>Sistem Pakar<br>Diagnosa Penyakit ISPA</h2>
+                </div>
+                <div class="row text-center">
+                    @if (Auth::user())
+                    @else
+                        <div class="row" style="padding-top: 150px">
+                            <span class="appointment-btn">
+                                <h1>Silahkan <a class="text-info" href="{{ route('login') }}">Login</a> terlebih dahulu
+                                </h1>
+                            </span>
+                        </div>
+                    @endif
+                </div>
+
             </div>
         </section>
 
