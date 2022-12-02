@@ -58,7 +58,7 @@
                                 </li>
                             @elseif (Auth::user()->role == 'pasien')
                                 <li>
-                                    <a href="{{ route('profile') }}"><span>Profile</span></a>
+                                    <a href="{{ route('home.profile') }}"><span>Profile</span></a>
                                 </li>
                             @endif
                             <li>

@@ -70,7 +70,7 @@ class SymptomController extends Controller
     public function edit($symptom)
     {
         return view('backend.doctor.symptom.edit', [
-            "symptom"   => Symptom::findorFail($symptom),
+            "symptom"   => Symptom::findorFail(decrypt($symptom)),
         ]);
     }
 
@@ -81,9 +81,19 @@ class SymptomController extends Controller
      * @param  \App\Models\symptom  $symptom
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, symptom $symptom)
+    public function update(Request $request, $symptom)
     {
-        //
+        $validatedData = $request->validate([
+            'name'          => 'required',
+            'description'   => 'required'
+        ]);
+
+        $hasil = Symptom::whereId($symptom)->update($validatedData);
+
+        if ($hasil) {
+            return redirect()->route('symptom.index')->with('success', 'Data penyakit berhasil diperbarui!');
+        }
+        return redirect()->route('symptom.index')->with('error', 'Data penyakit gagal diperbarui!');
     }
 
     /**

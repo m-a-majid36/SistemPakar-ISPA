@@ -10,8 +10,8 @@
                     <i class="icon-screen-desktop menu-icon"></i><span class="nav-text">Beranda</span>
                 </a>
             </li>
+            <li class="nav-label">Data Master</li>
             @if (Auth::user()->role == 'admin')
-                <li class="nav-label">Data Master</li>
                 <li class="{{ Request::is('dashboard/homesetting*') ? 'active' : '' }}">
                     <a href="{{ route('home.setting') }}" aria-expanded="false">
                         <i class="icon-home menu-icon"></i><span class="nav-text">Pengaturan Home</span>
@@ -28,20 +28,24 @@
                     </a>
                 </li>
             @elseif (Auth::user()->role == 'dokter')
-                <li class="nav-label">Data Master</li>
                 <li class="{{ Request::is('dashboard/disease*') ? 'active' : '' }}">
                     <a href="{{ route('disease.index') }}" aria-expanded="false">
-                        <i class="icon-list menu-icon"></i><span class="nav-text">Gejala</span>
+                        <i class="fa-solid fa-head-side-cough"></i><span class="nav-text">Gejala</span>
                     </a>
                 </li>
                 <li class="{{ Request::is('dashboard/symptom*') ? 'active' : '' }}">
                     <a href="{{ route('symptom.index') }}" aria-expanded="false">
-                        <i class="icon-notebook menu-icon"></i><span class="nav-text">Penyakit</span>
+                        <i class="fa-solid fa-lungs-virus"></i><span class="nav-text">Penyakit</span>
                     </a>
                 </li>
-                <li>
-                    <a href="#" aria-expanded="false">
-                        <i class="icon-chemistry menu-icon"></i><span class="nav-text">Bobot Gejala-Penyakit</span>
+                <li class="{{ Request::is('dashboard/treatment*') ? 'active' : '' }}">
+                    <a href="{{ route('treatment.index') }}" aria-expanded="false">
+                        <i class="fa-solid fa-prescription-bottle-medical"></i><span class="nav-text">Perawatan</span>
+                    </a>
+                </li>
+                <li class="{{ Request::is('dashboard/reason*') ? 'active' : '' }}">
+                    <a href="{{ route('reason.index') }}" aria-expanded="false">
+                        <i class="fa-solid fa-square-virus"></i><span class="nav-text">Penyebab</span>
                     </a>
                 </li>
                 <li class="nav-label">Riwayat</li>

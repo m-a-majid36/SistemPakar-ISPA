@@ -1,5 +1,5 @@
 @extends('backend.layouts.app')
-@section('title', 'Pesan')
+@section('title', 'Perawatan')
 @section('link')
     <link rel="stylesheet" href="{{ asset('backend/plugins/toastr/css/toastr.min.css') }}">
 @endsection
@@ -9,7 +9,7 @@
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active">Data Pesan</li>
+                <li class="breadcrumb-item active">Perawatan</li>
             </ol>
         </div>
     </div>
@@ -19,35 +19,32 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <h3>Data Pesan</h3>
+                        <h3>Data Perawatan</h3>
+                        <a href="{{ route('treatment.create') }}" class="btn btn-success text-white"><i
+                                class="icon-user-follow"></i>&nbsp; Tambah Perawatan</a>
                         <hr>
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered zero-configuration">
                                 <thead>
-                                    <tr>
-                                        <th>Nama</th>
-                                        <th>Email</th>
-                                        <th>Subjek</th>
-                                        <th>Pesan</th>
-                                        <th>Aksi</th>
-                                    </tr>
+                                    <th class="text-center" width="1">No.</th>
+                                    <th>Nama Perawatan</th>
+                                    <th class="text-center" width="100">Aksi</th>
                                 </thead>
                                 <tbody>
-                                    @foreach ($messages as $message)
+                                    @foreach ($treatments as $treatment)
                                         <tr>
-                                            <td>{{ $message->name }}</td>
-                                            <td>{{ $message->email }}</td>
-                                            <td>{{ $message->subject }}</td>
-                                            <td>{{ Str::of($message->message)->words(5, '...') }}</td>
+                                            <th class="text-center" style="vertical-align: middle">{{ $loop->iteration }}
+                                            </th>
+                                            <td>{{ $treatment->name }}</td>
                                             <td class="text-center">
-                                                <button type="button" class="btn btn-info" data-toggle="modal"
-                                                    data-target="#show{{ $message->id }}"><i class="icon-eye"></i></button>
-                                                <button type="button" class="btn btn-danger" data-toggle="modal"
-                                                    data-target="#delete{{ $message->id }}"><i
+                                                <a href="{{ route('treatment.edit', ['treatment' => encrypt($treatment->id)]) }}"
+                                                    class="btn btn-warning my-1 text-white"><i class="icon-note"></i></a>
+                                                <button type="button" class="btn btn-danger my-1" data-toggle="modal"
+                                                    data-target="#delete{{ $treatment->id }}"><i
                                                         class="icon-trash"></i></button>
                                             </td>
                                         </tr>
-                                        @include('backend.admin.message.modal')
+                                        @include('backend.doctor.treatment.modal')
                                     @endforeach
                                 </tbody>
                             </table>

@@ -39,7 +39,7 @@
                                 </li>
                                 <hr>
                                 <li>
-                                    <a href="{{ route('profile') }}"><i class="icon-user"></i>
+                                    <a href="{{ route('dashboard.profile') }}"><i class="icon-user"></i>
                                         <span>Profile</span></a>
                                 </li>
                                 <hr class="my-2">

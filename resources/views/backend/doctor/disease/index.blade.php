@@ -1,7 +1,7 @@
 @extends('backend.layouts.app')
 @section('title', 'Gejala')
 @section('link')
-
+    <link rel="stylesheet" href="{{ asset('backend/plugins/toastr/css/toastr.min.css') }}">
 @endsection
 @section('content')
     <!-- Breadcrumb -->
@@ -28,15 +28,21 @@
                                 <thead>
                                     <th class="text-center" width="1">No.</th>
                                     <th>Nama Gejala</th>
-                                    <th class="text-center" width="1">Bobot</th>
-                                    <th>Deskripsi</th>
-                                    <th>Pengobatan</th>
+                                    <th class="text-center" width="100">Aksi</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($diseases as $disease)
                                         <tr>
                                             <th class="text-center" style="vertical-align: middle">{{ $loop->iteration }}
                                             </th>
+                                            <td>{{ $disease->name }}</td>
+                                            <td class="text-center">
+                                                <a href="{{ route('disease.edit', ['disease' => encrypt($disease->id)]) }}"
+                                                    class="btn btn-warning my-1 text-white"><i class="icon-note"></i></a>
+                                                <button type="button" class="btn btn-danger my-1" data-toggle="modal"
+                                                    data-target="#delete{{ $disease->id }}"><i
+                                                        class="icon-trash"></i></button>
+                                            </td>
                                         </tr>
                                         @include('backend.doctor.disease.modal')
                                     @endforeach

@@ -30,7 +30,7 @@
                                         <th class="text-center" width="1">No.</th>
                                         <th>Nama</th>
                                         <th>Deskripsi</th>
-                                        <th class="text-center" width="210">Aksi</th>
+                                        <th class="text-center" width="100">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -41,11 +41,6 @@
                                             <td>{{ $symptom->name }}</td>
                                             <td>{{ $symptom->description }}</td>
                                             <td class="text-center">
-                                                <a href="{{ route('symptom.show', ['symptom' => encrypt($symptom->id)]) }}"
-                                                    class="btn btn-info my-1"><i class="icon-eye"></i></a>
-                                                <button type="button" class="btn btn-secondary my-1 text-white"
-                                                    data-toggle="modal" data-target="#reset{{ $symptom->id }}"><i
-                                                        class="icon-refresh"></i></button>
                                                 <a href="{{ route('symptom.edit', ['symptom' => encrypt($symptom->id)]) }}"
                                                     class="btn btn-warning my-1 text-white"><i class="icon-note"></i></a>
                                                 <button type="button" class="btn btn-danger my-1" data-toggle="modal"

@@ -6,8 +6,10 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ReasonController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SymptomController;
+use App\Http\Controllers\TreatmentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -44,16 +46,31 @@ Route::middleware('guest')->group(function() {
     Route::post('/getvillages', [RegisterController::class, 'get_villages'])->name('get.villages');
 });
 
+Route::middleware('auth', 'role:pasien')->group(function() {
+    Route::get('/profile', [HomeController::class, 'profile'])->name('home.profile');
+    Route::put('/profile', [HomeController::class, 'profile_update'])->name('home.profile.update');
+    Route::put('/profile/password', [HomeController::class, 'profile_password'])->name('home.profile.password');
+    Route::post('/profile/getregencies', [HomeController::class, 'get_regencies'])->name('home.get.regencies');
+    Route::post('/profile/getdistricts', [HomeController::class, 'get_districts'])->name('home.get.districts');
+    Route::post('/profile/getvillages', [HomeController::class, 'get_villages'])->name('home.get.villages');
+});
+
 Route::get('logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
 
 Route::get('dashboard', [DashboardController::class, 'index'])->middleware('auth', 'role:admin,dokter')->name('dashboard');
 Route::prefix('dashboard')->middleware('auth')
     ->group(function() {
         Route::group(['middleware' => ['role:admin,dokter']], function() {
-            Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
-            Route::put('/profile', [DashboardController::class, 'profile_update'])->name('profile.update');
+            Route::get('/profile', [DashboardController::class, 'profile'])->name('dashboard.profile');
+            Route::put('/profile', [DashboardController::class, 'profile_update'])->name('dashboard.profile.update');
+            Route::put('/profile/password', [DashboardController::class, 'profile_password'])->name('dashboard.profile.password');
+            Route::post('/profile/getregencies', [DashboardController::class, 'get_regencies'])->name('dashboard.get.regencies');
+            Route::post('/profile/getdistricts', [DashboardController::class, 'get_districts'])->name('dashboard.get.districts');
+            Route::post('/profile/getvillages', [DashboardController::class, 'get_villages'])->name('dashboard.get.villages');
             Route::resource('disease', DiseaseController::class);
             Route::resource('symptom', SymptomController::class);
+            Route::resource('treatment', TreatmentController::class);
+            Route::resource('reason', ReasonController::class);
         });
         Route::group(['middleware' => ['role:admin']], function() {
             Route::get('/homesetting', [FrontendController::class, 'index'])->name('home.setting');

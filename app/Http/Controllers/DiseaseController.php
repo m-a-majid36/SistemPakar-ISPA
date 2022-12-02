@@ -37,7 +37,14 @@ class DiseaseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate(['name' => 'required']);
+
+        $hasil = Disease::create($validatedData);
+
+        if ($hasil) {
+            return redirect()->route('disease.index')->with('success', 'Data gejala berhasil ditambahkan!');
+        }
+        return redirect()->route('disease.index')->with('error', 'Data gejala gagal ditambahkan!');
     }
 
     /**
@@ -60,7 +67,7 @@ class DiseaseController extends Controller
     public function edit($disease)
     {
         return view('backend.doctor.disease.edit', [
-            "disease"   => Disease::findorFail($disease),
+            "disease"   => Disease::findorFail(decrypt($disease)),
         ]);
     }
 
@@ -71,9 +78,18 @@ class DiseaseController extends Controller
      * @param  \App\Models\disease  $disease
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, disease $disease)
+    public function update(Request $request, $disease)
     {
-        //
+        $validatedData = $request->validate([
+            'name'  => 'required'
+        ]);
+
+        $hasil = Disease::whereId($disease)->update($validatedData);
+
+        if ($hasil) {
+            return redirect()->route('disease.index')->with('success', 'Data gejala berhasil diperbarui!');
+        }
+        return redirect()->route('disease.index')->with('error', 'Data gejala gagal diperbarui!');
     }
 
     /**
