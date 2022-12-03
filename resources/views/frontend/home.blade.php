@@ -110,19 +110,19 @@
             </div>
         </section><!-- End About Section -->
 
-        <!-- ======= Consult Now Section ======= -->
+        <!-- ======= Diagnosis Now Section ======= -->
         <section id="counts" class="counts">
             <div class="container">
                 <div class="row">
                     <div class="text-center">
-                        <a href="{{ route('consult') }}" class="appointment-btn btn py-3" style="font-size: 20px">
-                            <strong>Konsultasi Sekarang</strong>
+                        <a href="{{ route('diagnosis') }}" class="appointment-btn btn py-3" style="font-size: 20px">
+                            <strong>Cek Diagnosa Sekarang</strong>
                         </a>
                         {{-- <a href="#" class="appointment-btn"><span class="d-none d-md-inline">Masuk Panel</span></a> --}}
                     </div>
                 </div>
             </div>
-        </section><!-- End Consult Now Section -->
+        </section><!-- End Diagnosis Now Section -->
 
         <!-- ======= Contact Section ======= -->
         <section id="contact" class="contact">

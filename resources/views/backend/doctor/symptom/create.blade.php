@@ -24,7 +24,9 @@
                         <form class="basic-form" action="{{ route('symptom.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="name">Nama</label>
+                                <label for="name">
+                                    <h5>Nama</h5>
+                                </label>
                                 <input type="text" name="name" id="name" required placeholder="Nama Penyakit"
                                     autofocus class="form-control @error('name') is-invalid @enderror"
                                     value="{{ old('name') }}">
@@ -33,12 +35,169 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="description">Deskripsi</label>
+                                <label for="description">
+                                    <h5>Deskripsi</h5>
+                                </label>
                                 <textarea name="description" id="description" required placeholder="Deskripsi Penyakit"
                                     class="form-control @error('description') is-invalid @enderror">{{ old('description') }}</textarea>
                                 @error('description')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
+                            </div>
+                            <div class="form-row mb-3">
+                                <div id="accordion-three" class="accordion col-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne1"
+                                                aria-expanded="false" aria-controls="collapseOne1">
+                                                <i class="fa" aria-hidden="true"></i> Gejala
+                                            </h5>
+                                        </div>
+                                        <div id="collapseOne1" class="collapse" data-parent="#accordion-three">
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover table-bordered table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="text-center" width="1">Pilih</th>
+                                                                <th>Gejala</th>
+                                                                <th class="text-center" width="200">
+                                                                    Nilai<br>(Gunakan . untuk desimal)
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($diseases as $disease)
+                                                                <tr>
+                                                                    <th style="vertical-align: middle">
+                                                                        <div class="input-group-prepend">
+                                                                            <div class="input-group-text">
+                                                                                <input type="checkbox"
+                                                                                    data-id="{{ $disease->id }}"
+                                                                                    class="disease-enable">
+                                                                            </div>
+                                                                        </div>
+                                                                    </th>
+                                                                    <td>{{ $disease->name }}</td>
+                                                                    <td style="vertical-align: middle">
+                                                                        <input type="text"
+                                                                            name="diseases[{{ $disease->id }}]"
+                                                                            data-id="{{ $disease->id }}"
+                                                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '');"
+                                                                            disabled class="disease-score form-control">
+                                                                    </td>
+                                                                </tr>
+                                                                @error('diseases')
+                                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                                @enderror
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row mb-3">
+                                <div id="accordion-three" class="accordion col-lg-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo2"
+                                                aria-expanded="false" aria-controls="collapseTwo2">
+                                                <i class="fa" aria-hidden="true"></i> Penyebab
+                                            </h5>
+                                        </div>
+                                        <div id="collapseTwo2" class="collapse" data-parent="#accordion-three">
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover table-bordered table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="text-center" width="1">Pilih</th>
+                                                                <th>Penyebab</th>
+                                                                <th class="text-center">Kategori</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($reasons as $reason)
+                                                                <tr>
+                                                                    <th style="vertical-align: middle">
+                                                                        <div class="input-group-prepend">
+                                                                            <div class="input-group-text">
+                                                                                <input type="checkbox" name="reason[]"
+                                                                                    id="reason[]"
+                                                                                    value="{{ $reason->id }}">
+                                                                            </div>
+                                                                        </div>
+                                                                    </th>
+                                                                    <td>{{ $reason->name }}</td>
+                                                                    <td class="text-center">
+                                                                        @if ($reason->category == 'B')
+                                                                            <span
+                                                                                class="label gradient-6 text-white rounded">Bakteri</span>
+                                                                        @elseif ($reason->category == 'V')
+                                                                            <span
+                                                                                class="label gradient-7 rounded">Virus</span>
+                                                                        @endif
+                                                                    </td>
+                                                                </tr>
+                                                                @error('reasons[]')
+                                                                    <div class="invalid-feedback">{{ $message }}
+                                                                    </div>
+                                                                @enderror
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="accordion-three" class="accordion col-lg-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="mb-0 collapsed" data-toggle="collapse"
+                                                data-target="#collapseThree3" aria-expanded="false"
+                                                aria-controls="collapseThree3"><i class="fa" aria-hidden="true"></i>
+                                                Perawatan</h5>
+                                        </div>
+                                        <div id="collapseThree3" class="collapse" data-parent="#accordion-three">
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover table-bordered table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="text-center" width="1">Pilih</th>
+                                                                <th>Perawatan</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($treatments as $treatment)
+                                                                <tr>
+                                                                    <th style="vertical-align: middle">
+                                                                        <div class="input-group-prepend">
+                                                                            <div class="input-group-text">
+                                                                                <input type="checkbox" name="treatment[]"
+                                                                                    id="treatment[]"
+                                                                                    value="{{ $treatment->id }}">
+                                                                            </div>
+                                                                        </div>
+                                                                    </th>
+                                                                    <td>{{ $treatment->name }}</td>
+                                                                </tr>
+                                                                @error('treatment[]')
+                                                                    <div class="invalid-feedback">{{ $message }}
+                                                                    </div>
+                                                                @enderror
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary w-100">Tambah Penyakit</button>
                         </form>
@@ -47,4 +206,16 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $(".disease-enable").on('click', function() {
+                let id = $(this).attr('data-id')
+                let enabled = $(this).is(":checked")
+                $('.disease-score[data-id="' + id + '"]').attr('disabled', !enabled)
+                $('.disease-score[data-id="' + id + '"]').val(null)
+            });
+        });
+    </script>
 @endsection

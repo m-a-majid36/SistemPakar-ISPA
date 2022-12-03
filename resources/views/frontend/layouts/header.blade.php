@@ -26,7 +26,7 @@
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-        <h1 class="logo me-auto"><a href="index.html">Layanan Diagnosa Penyakit ISPA</a></h1>
+        <h1 class="logo me-auto"><a href="/">Layanan Diagnosa Penyakit ISPA</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -38,8 +38,9 @@
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link {{ Request::is('consult*') ? 'active' : '' }}" href="{{ route('consult') }}">
-                        Konsultasi
+                    <a class="nav-link {{ Request::is('diagnosis*') ? 'active' : '' }}"
+                        href="{{ route('diagnosis') }}">
+                        Diagnosa
                     </a>
                 </li>
                 <li>
@@ -49,7 +50,7 @@
                 </li>
                 @if (Auth::user())
                     <li class="dropdown"><a href="#" class="appointment-btn text-white"
-                            style="margin: 0px; padding: 5px 10px;"><span>Menu</span>
+                            style="margin: 0px; padding: 5px 10px;"><span>{{ Auth::user()->name }}</span>
                             <i class="bi bi-chevron-down"></i></a>
                         <ul>
                             @if (Auth::user()->role == 'admin' || Auth::user()->role == 'dokter')

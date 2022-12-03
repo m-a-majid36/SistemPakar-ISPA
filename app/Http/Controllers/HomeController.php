@@ -22,11 +22,11 @@ class HomeController extends Controller
         return view('frontend.home', compact('data'));
     }
 
-    public function consult()
+    public function diagnosis()
     {
         $data = Frontend::whereId(1)->first();
 
-        return view('frontend.consult', compact('data'));
+        return view('frontend.diagnosis', compact('data'));
     }
 
     public function info()

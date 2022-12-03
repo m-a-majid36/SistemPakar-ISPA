@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Disease;
+use App\Models\Reason;
 use App\Models\Symptom;
+use App\Models\Treatment;
 use Illuminate\Http\Request;
 
 class SymptomController extends Controller
@@ -26,7 +29,11 @@ class SymptomController extends Controller
      */
     public function create()
     {
-        return view('backend.doctor.symptom.create');
+        return view('backend.doctor.symptom.create', [
+            "diseases"      => Disease::all(),
+            "reasons"       => Reason::all(),
+            "treatments"    => Treatment::all()
+        ]);
     }
 
     /**
@@ -42,9 +49,19 @@ class SymptomController extends Controller
             'description'   => 'required'
         ]);
 
-        $hasil = Symptom::create($validatedData);
+        $symptom = Symptom::create($validatedData);
 
-        if ($hasil) {
+        $diseases = collect($request->input('diseases', []))
+            ->map(function($disease) {
+                return ['score' => $disease];
+            });
+        dd($diseases);
+
+        $symptom->diseases()->sync(
+            $diseases
+        );
+
+        if ($symptom) {
             return redirect()->route('symptom.index')->with('success', 'Data penyakit berhasil ditambahkan!');
         }
         return redirect()->route('symptom.index')->with('error', 'Data penyakit gagal ditambahkan!');
@@ -56,9 +73,11 @@ class SymptomController extends Controller
      * @param  \App\Models\symptom  $symptom
      * @return \Illuminate\Http\Response
      */
-    public function show(symptom $symptom)
+    public function show($symptom)
     {
-        //
+        return view('backend.doctor.symptom.show', [
+            "symptom" => Symptom::findorFail(decrypt($symptom)),
+        ]);
     }
 
     /**

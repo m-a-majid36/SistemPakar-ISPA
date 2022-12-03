@@ -10,4 +10,10 @@ class Symptom extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function diseases()
+    {
+        return $this->belongsToMany(Disease::class)
+            ->withPivot(['score']);
+    }
 }

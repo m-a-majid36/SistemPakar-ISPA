@@ -23,18 +23,18 @@
                 <div class="section-title">
                     <h2>Sistem Pakar<br>Diagnosa Penyakit ISPA</h2>
                 </div>
-                <div class="row text-center">
-                    @if (Auth::user())
+                @if (Auth::user())
+                    @if (Auth::user()->role == 'pasien')
                     @else
-                        <div class="row" style="padding-top: 150px">
-                            <span class="appointment-btn">
-                                <h1>Silahkan <a class="text-info" href="{{ route('login') }}">Login</a> terlebih dahulu
-                                </h1>
-                            </span>
+                        <div class="row text-center">
+                            <h1>Diagnosa hanya untuk <strong>Pasien</strong></h1>
                         </div>
                     @endif
-                </div>
-
+                @else
+                    <div class="row text-center">
+                        <h1>Silahkan <a class="text-primary" href="{{ route('login') }}">Login</a> terlebih dahulu</h1>
+                    </div>
+                @endif
             </div>
         </section>
 

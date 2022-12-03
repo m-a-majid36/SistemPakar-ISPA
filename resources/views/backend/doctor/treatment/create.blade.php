@@ -24,7 +24,9 @@
                         <form action="{{ route('treatment.store') }}" method="POST" class="basic-form">
                             @csrf
                             <div class="form-group">
-                                <label for="name">Perawatan</label>
+                                <label for="name">
+                                    <h5>Perawatan</h5>
+                                </label>
                                 <input type="text" name="name" id="name" required placeholder="Perawatan"
                                     autofocus class="form-control @error('name') is-invalid @enderror"
                                     value="{{ old('name') }}">

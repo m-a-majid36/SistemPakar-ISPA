@@ -28,24 +28,24 @@
                     </a>
                 </li>
             @elseif (Auth::user()->role == 'dokter')
-                <li class="{{ Request::is('dashboard/disease*') ? 'active' : '' }}">
-                    <a href="{{ route('disease.index') }}" aria-expanded="false">
-                        <i class="fa-solid fa-head-side-cough"></i><span class="nav-text">Gejala</span>
-                    </a>
-                </li>
                 <li class="{{ Request::is('dashboard/symptom*') ? 'active' : '' }}">
                     <a href="{{ route('symptom.index') }}" aria-expanded="false">
                         <i class="fa-solid fa-lungs-virus"></i><span class="nav-text">Penyakit</span>
                     </a>
                 </li>
-                <li class="{{ Request::is('dashboard/treatment*') ? 'active' : '' }}">
-                    <a href="{{ route('treatment.index') }}" aria-expanded="false">
-                        <i class="fa-solid fa-prescription-bottle-medical"></i><span class="nav-text">Perawatan</span>
+                <li class="{{ Request::is('dashboard/disease*') ? 'active' : '' }}">
+                    <a href="{{ route('disease.index') }}" aria-expanded="false">
+                        <i class="fa-solid fa-head-side-cough"></i><span class="nav-text">Gejala</span>
                     </a>
                 </li>
                 <li class="{{ Request::is('dashboard/reason*') ? 'active' : '' }}">
                     <a href="{{ route('reason.index') }}" aria-expanded="false">
                         <i class="fa-solid fa-square-virus"></i><span class="nav-text">Penyebab</span>
+                    </a>
+                </li>
+                <li class="{{ Request::is('dashboard/treatment*') ? 'active' : '' }}">
+                    <a href="{{ route('treatment.index') }}" aria-expanded="false">
+                        <i class="fa-solid fa-prescription-bottle-medical"></i><span class="nav-text">Perawatan</span>
                     </a>
                 </li>
                 <li class="nav-label">Riwayat</li>

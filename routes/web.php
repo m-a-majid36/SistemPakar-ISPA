@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DiagnosisController;
 use App\Http\Controllers\DiseaseController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\HomeController;
@@ -31,7 +32,7 @@ Route::get('/home', function(){
     if (Auth::user()->role == 'admin' || Auth::user()->role == 'dokter') {
         return redirect('dashboard');
     } else {return redirect('/');}});
-Route::get('/consult', [HomeController::class, 'consult'])->name('consult');
+Route::get('/diagnosis', [HomeController::class, 'diagnosis'])->name('diagnosis');
 Route::get('/info', [HomeController::class, 'info'])->name('info');
 Route::post('/message', [MessageController::class, 'store'])->name('message.store');
 
@@ -47,12 +48,16 @@ Route::middleware('guest')->group(function() {
 });
 
 Route::middleware('auth', 'role:pasien')->group(function() {
-    Route::get('/profile', [HomeController::class, 'profile'])->name('home.profile');
-    Route::put('/profile', [HomeController::class, 'profile_update'])->name('home.profile.update');
-    Route::put('/profile/password', [HomeController::class, 'profile_password'])->name('home.profile.password');
-    Route::post('/profile/getregencies', [HomeController::class, 'get_regencies'])->name('home.get.regencies');
-    Route::post('/profile/getdistricts', [HomeController::class, 'get_districts'])->name('home.get.districts');
-    Route::post('/profile/getvillages', [HomeController::class, 'get_villages'])->name('home.get.villages');
+    Route::prefix('profile')->group(function() {
+        Route::get('/', [HomeController::class, 'profile'])->name('home.profile');
+        Route::put('/', [HomeController::class, 'profile_update'])->name('home.profile.update');
+        Route::put('/password', [HomeController::class, 'profile_password'])->name('home.profile.password');
+        Route::post('/getregencies', [HomeController::class, 'get_regencies'])->name('home.get.regencies');
+        Route::post('/getdistricts', [HomeController::class, 'get_districts'])->name('home.get.districts');
+        Route::post('/getvillages', [HomeController::class, 'get_villages'])->name('home.get.villages');
+    });
+
+    Route::resource('diagnosis', DiagnosisController::class)->except('index');
 });
 
 Route::get('logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');

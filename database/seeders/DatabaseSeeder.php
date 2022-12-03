@@ -15,7 +15,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            FrontendSeeder::class
+            FrontendSeeder::class,
+            DiseaseSeeder::class,
+            ReasonSeeder::class,
+            TreatmentSeeder::class
         ]);
         $this->call(IndoRegionProvinceSeeder::class);
         $this->call(IndoRegionRegencySeeder::class);

@@ -24,7 +24,9 @@
                         <form action="{{ route('reason.store') }}" method="POST" class="basic-form">
                             @csrf
                             <div class="form-group">
-                                <label for="name">Penyebab</label>
+                                <label for="name">
+                                    <h5>Penyebab</h5>
+                                </label>
                                 <input type="text" name="name" id="name" required placeholder="Penyebab"
                                     autofocus class="form-control @error('name') is-invalid @enderror"
                                     value="{{ old('name') }}">
@@ -33,7 +35,9 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="category">Kategori</label>
+                                <label for="category">
+                                    <h5>Kategori</h5>
+                                </label>
                                 <select name="category" id="category" required
                                     class="form-control @error('category') is-invalid @enderror">
                                     <option selected disabled>Pilih Kategori</option>

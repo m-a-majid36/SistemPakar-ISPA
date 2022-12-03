@@ -30,7 +30,7 @@
                                         <th class="text-center" width="1">No.</th>
                                         <th>Nama</th>
                                         <th>Deskripsi</th>
-                                        <th class="text-center" width="100">Aksi</th>
+                                        <th class="text-center" width="150">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -41,6 +41,8 @@
                                             <td>{{ $symptom->name }}</td>
                                             <td>{{ $symptom->description }}</td>
                                             <td class="text-center">
+                                                <a href="{{ route('symptom.show', ['symptom' => encrypt($symptom->id)]) }}"
+                                                    class="btn btn-info my-1"><i class="icon-eye"></i></a>
                                                 <a href="{{ route('symptom.edit', ['symptom' => encrypt($symptom->id)]) }}"
                                                     class="btn btn-warning my-1 text-white"><i class="icon-note"></i></a>
                                                 <button type="button" class="btn btn-danger my-1" data-toggle="modal"
