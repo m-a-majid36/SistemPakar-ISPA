@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHistoryTreatmentTable extends Migration
+class CreateTreatmentHistoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateHistoryTreatmentTable extends Migration
      */
     public function up()
     {
-        Schema::create('history_treatment', function (Blueprint $table) {
+        Schema::create('treatment_history', function (Blueprint $table) {
             $table->id();
             $table->foreignId('history_id')
                 ->constrained()

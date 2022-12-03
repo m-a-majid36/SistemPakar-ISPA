@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSymptomDiseaseTable extends Migration
+class CreateDiseaseHistoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateSymptomDiseaseTable extends Migration
      */
     public function up()
     {
-        Schema::create('symptom_disease', function (Blueprint $table) {
+        Schema::create('disease_history', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('symptom_id')
+            $table->foreignId('history_id')
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->restrictOnDelete();
@@ -23,7 +23,6 @@ class CreateSymptomDiseaseTable extends Migration
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->restrictOnDelete();
-            $table->double('score');
             $table->timestamps();
         });
     }
@@ -35,6 +34,6 @@ class CreateSymptomDiseaseTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('symptoms_diseases');
+        Schema::dropIfExists('histories_diseases');
     }
 }

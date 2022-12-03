@@ -49,13 +49,12 @@ class SymptomController extends Controller
             'description'   => 'required'
         ]);
 
-        $symptom = Symptom::create($validatedData);
-
         $diseases = collect($request->input('diseases', []))
             ->map(function($disease) {
                 return ['score' => $disease];
             });
-        dd($diseases);
+
+        $symptom = Symptom::create($validatedData);
 
         $symptom->diseases()->sync(
             $diseases
