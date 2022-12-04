@@ -80,7 +80,7 @@
                                                                     </th>
                                                                     <td>{{ $disease->name }}</td>
                                                                     <td style="vertical-align: middle">
-                                                                        <input type="text"
+                                                                        <input type="text" required="false"
                                                                             name="diseases[{{ $disease->id }}]"
                                                                             data-id="{{ $disease->id }}"
                                                                             oninput="this.value = this.value.replace(/[^0-9.]/g, '');"
@@ -125,8 +125,9 @@
                                                                     <th style="vertical-align: middle">
                                                                         <div class="input-group-prepend">
                                                                             <div class="input-group-text">
-                                                                                <input type="checkbox" name="reason[]"
-                                                                                    id="reason[]"
+                                                                                <input type="checkbox"
+                                                                                    name="reason[{{ $reason->id }}]"
+                                                                                    id="reason[{{ $reason->id }}]"
                                                                                     value="{{ $reason->id }}">
                                                                             </div>
                                                                         </div>
@@ -178,8 +179,9 @@
                                                                     <th style="vertical-align: middle">
                                                                         <div class="input-group-prepend">
                                                                             <div class="input-group-text">
-                                                                                <input type="checkbox" name="treatment[]"
-                                                                                    id="treatment[]"
+                                                                                <input type="checkbox"
+                                                                                    name="treatment[{{ $treatment->id }}]"
+                                                                                    id="treatment[{{ $treatment->id }}]"
                                                                                     value="{{ $treatment->id }}">
                                                                             </div>
                                                                         </div>
@@ -215,6 +217,12 @@
                 let enabled = $(this).is(":checked")
                 $('.disease-score[data-id="' + id + '"]').attr('disabled', !enabled)
                 $('.disease-score[data-id="' + id + '"]').val(null)
+
+                if (enabled) {
+                    $('.disease-score[data-id="' + id + '"]').setAttribute("required", "");
+                } else {
+                    $('.disease-score[data-id="' + id + '"]').removeAttribute("required");
+                }
             });
         });
     </script>

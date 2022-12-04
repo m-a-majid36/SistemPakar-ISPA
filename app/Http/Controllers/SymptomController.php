@@ -53,12 +53,13 @@ class SymptomController extends Controller
             ->map(function($disease) {
                 return ['score' => $disease];
             });
+        $reasons = collect($request->input('reason', []));
+        $treatments = collect($request->input('treatments', []));
 
         $symptom = Symptom::create($validatedData);
-
-        $symptom->diseases()->sync(
-            $diseases
-        );
+        $symptom->diseases()->sync($diseases);
+        $symptom->reasons()->sync($reasons);
+        $symptom->treatments()->sync($treatments);
 
         if ($symptom) {
             return redirect()->route('symptom.index')->with('success', 'Data penyakit berhasil ditambahkan!');

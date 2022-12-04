@@ -18,11 +18,11 @@ class CreateHistoriesTable extends Migration
             $table->foreignId('user_id')
                 ->constrained()
                 ->cascadeOnUpdate()
-                ->restrictOnDelete();
+                ->cascadeOnDelete();
             $table->foreignId('symptom_id')
                 ->constrained()
                 ->cascadeOnUpdate()
-                ->restrictOnDelete();
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }

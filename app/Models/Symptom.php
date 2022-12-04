@@ -16,4 +16,14 @@ class Symptom extends Model
         return $this->belongsToMany(Disease::class)
             ->withPivot(['score']);
     }
+
+    public function reasons()
+    {
+        return $this->belongsToMany(Reason::class);
+    }
+
+    public function treatments()
+    {
+        return $this->belongsToMany(Treatment::class);
+    }
 }
