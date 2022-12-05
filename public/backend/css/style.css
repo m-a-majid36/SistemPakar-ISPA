@@ -7554,21 +7554,18 @@ sub {
   border-top: 1px solid rgba(120, 130, 140, 0.13);
   color: #abafb3; }
 
-.footer {
-  padding-left: 15.1875rem;
-  background-color: #fff;
-  position: fixed;
-  bottom: 0;
-  width: 100%; }
-  .footer .copyright {
-    padding: 0.9375rem;
-    background: white; }
-    .footer .copyright p {
-      text-align: center;
-      margin: 0;
-      color: #898989; }
-    .footer .copyright a {
-      color: #7571f9; }
+  .footer {
+    padding-left: 15.1875rem;
+    background-color: #fff; }
+    .footer .copyright {
+      padding: 0.9375rem;
+      background: white; }
+      .footer .copyright p {
+        text-align: center;
+        margin: 0;
+        color: #898989; }
+      .footer .copyright a {
+        color: #7571f9; }
 
 [data-sidebar-style="mini"] .nav-control, [data-layout="horizontal"] .nav-control {
   display: none; }

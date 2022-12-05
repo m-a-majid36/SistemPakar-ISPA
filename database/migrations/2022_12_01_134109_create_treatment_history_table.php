@@ -17,11 +17,9 @@ class CreateTreatmentHistoryTable extends Migration
             $table->id();
             $table->foreignId('history_id')
                 ->constrained()
-                ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->foreignId('treatment_id')
                 ->constrained()
-                ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->timestamps();
         });

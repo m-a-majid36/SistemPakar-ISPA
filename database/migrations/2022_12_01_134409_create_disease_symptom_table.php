@@ -17,11 +17,9 @@ class CreateDiseaseSymptomTable extends Migration
             $table->id();
             $table->foreignId('symptom_id')
                 ->constrained()
-                ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->foreignId('disease_id')
                 ->constrained()
-                ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->double('score');
             $table->timestamps();

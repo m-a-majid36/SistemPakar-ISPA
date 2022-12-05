@@ -28,40 +28,58 @@
                         <hr>
                         <h5>{{ $symptom->description }}</h5>
                         <hr>
-                        <h5 class="mt-3 card-title">Gejala :</h5>
-                        <div class="basic-list-group">
-                            <ul class="list-group">
-                                <li class="list-group-item d-flex justify-content-between align-items-center">Cras justo
-                                    odio <span class="input-group-text">14</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">Dapibus ac
-                                    facilisis in <span class="input-group-text">2</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">Morbi leo
-                                    risus <span class="input-group-text">1</span>
-                                </li>
-                            </ul>
-                        </div>
+                        <h5 class="mt-3 card-title">Gejala :@if (!$symptom->diseases->count())
+                                <strong class="text-danger">Tidak ada gejala</strong>
+                            @endif
+                        </h5>
+                        @if ($symptom->diseases->count())
+                            <div class="basic-list-group">
+                                <ul class="list-group">
+                                    @foreach ($symptom->diseases as $disease)
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            {{ $disease->name }}<span
+                                                class="input-group-text">{{ $disease->pivot->score }}</span>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div class="row mt-3">
                             <div class="col-md-6">
-                                <h5 class="mt-3 card-title">Penyebab :</h5>
-                                <div class="basic-list-group">
-                                    <ul class="list-group">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">Cras
-                                            justoodio
-                                        </li>
-                                    </ul>
-                                </div>
+                                <h5 class="mt-3 card-title">Penyebab :@if (!$symptom->reasons->count())
+                                        <strong class="text-danger">Tidak ada penyebab</strong>
+                                    @endif
+                                </h5>
+                                @if ($symptom->reasons->count())
+                                    <div class="basic-list-group">
+                                        <ul class="list-group">
+                                            @foreach ($symptom->reasons as $reason)
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                                    {{ $reason->name }}
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                             </div>
                             <div class="col-md-6">
-                                <h5 class="mt-3 card-title">Perawatan :</h5>
-                                <div class="basic-list-group">
-                                    <ul class="list-group">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Crasjustoodio
-                                        </li>
-                                    </ul>
-                                </div>
+                                <h5 class="mt-3 card-title">Perawatan :@if (!$symptom->treatments->count())
+                                        <strong class="text-danger">Tidak ada perawatan</strong>
+                                    @endif
+                                </h5>
+                                @if ($symptom->treatments->count())
+                                    <div class="basic-list-group">
+                                        <ul class="list-group">
+                                            @foreach ($symptom->treatments as $treatment)
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                                    {{ $treatment->name }}
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                             </div>
                         </div>
 

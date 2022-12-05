@@ -14,7 +14,7 @@ class Symptom extends Model
     public function diseases()
     {
         return $this->belongsToMany(Disease::class)
-            ->withPivot(['score']);
+            ->withPivot('score');
     }
 
     public function reasons()

@@ -17,11 +17,9 @@ class CreateReasonSymptomTable extends Migration
             $table->id();
             $table->foreignId('symptom_id')
                 ->constrained()
-                ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->foreignId('reason_id')
                 ->constrained()
-                ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->timestamps();
         });

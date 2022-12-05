@@ -28,8 +28,11 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center" width="1">No.</th>
-                                        <th>Nama</th>
+                                        <th width="90">Nama</th>
                                         <th>Deskripsi</th>
+                                        <th class="text-center" width="1">Total Gejala</th>
+                                        <th>Penyebab</th>
+                                        <th>Perawatan</th>
                                         <th class="text-center" width="150">Aksi</th>
                                     </tr>
                                 </thead>
@@ -40,6 +43,41 @@
                                             </th>
                                             <td>{{ $symptom->name }}</td>
                                             <td>{{ $symptom->description }}</td>
+                                            <td
+                                                class="text-center {{ $symptom->diseases->count() ? null : 'text-danger' }}">
+                                                {{ $symptom->diseases->count() }}
+                                            </td>
+                                            <td>
+                                                @if ($symptom->reasons->count())
+                                                    <ul>
+                                                        <hr class="my-2 p-0">
+                                                        @foreach ($symptom->reasons as $reason)
+                                                            <li>
+                                                                {{ $reason->name }}
+                                                                <hr class="my-2 p-0">
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                @else
+                                                    <div class="text-danger">Tidak ada penyebab</div>
+                                                @endif
+
+                                            </td>
+                                            <td>
+                                                @if ($symptom->treatments->count())
+                                                    <ul>
+                                                        <hr class="my-2 p-0">
+                                                        @foreach ($symptom->treatments as $treatment)
+                                                            <li>
+                                                                {{ $treatment->name }}
+                                                                <hr class="my-2 p-0">
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                @else
+                                                    <div class="text-danger">Tidak ada Perawatan</div>
+                                                @endif
+                                            </td>
                                             <td class="text-center">
                                                 <a href="{{ route('symptom.show', ['symptom' => encrypt($symptom->id)]) }}"
                                                     class="btn btn-info my-1"><i class="icon-eye"></i></a>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTreatmentSymptomTable extends Migration
+class CreateSymptomTreatmentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateTreatmentSymptomTable extends Migration
      */
     public function up()
     {
-        Schema::create('treatment_symptom', function (Blueprint $table) {
+        Schema::create('symptom_treatment', function (Blueprint $table) {
             $table->id();
             $table->foreignId('symptom_id')
                 ->constrained()
-                ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->foreignId('treatment_id')
                 ->constrained()
-                ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->timestamps();
         });

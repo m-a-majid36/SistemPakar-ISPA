@@ -9,9 +9,9 @@
         @include('backend.layouts.navbar')
         @include('backend.layouts.sidebar')
 
-        <main id="main" class="content-body" style="min-height: 100vh">
+        <div class="content-body">
             @yield('content')
-        </main>
+        </div>
 
         @include('backend.layouts.footer')
     </div>

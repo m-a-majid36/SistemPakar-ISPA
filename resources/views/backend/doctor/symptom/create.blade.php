@@ -99,8 +99,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-row mb-3">
-                                <div id="accordion-three" class="accordion col-lg-6">
+                            <div class="form-row">
+                                <div id="accordion-three" class="accordion col-lg-6 mb-3">
                                     <div class="card">
                                         <div class="card-header">
                                             <h5 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo2"
@@ -155,7 +155,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="accordion-three" class="accordion col-lg-6">
+                                <div id="accordion-three" class="accordion col-lg-6 mb-3">
                                     <div class="card">
                                         <div class="card-header">
                                             <h5 class="mb-0 collapsed" data-toggle="collapse"

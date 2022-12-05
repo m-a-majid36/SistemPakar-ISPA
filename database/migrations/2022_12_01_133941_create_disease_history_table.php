@@ -17,11 +17,9 @@ class CreateDiseaseHistoryTable extends Migration
             $table->id();
             $table->foreignId('history_id')
                 ->constrained()
-                ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->foreignId('disease_id')
                 ->constrained()
-                ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->timestamps();
         });

@@ -54,7 +54,7 @@ class SymptomController extends Controller
                 return ['score' => $disease];
             });
         $reasons = collect($request->input('reason', []));
-        $treatments = collect($request->input('treatments', []));
+        $treatments = collect($request->input('treatment', []));
 
         $symptom = Symptom::create($validatedData);
         $symptom->diseases()->sync($diseases);
@@ -88,9 +88,28 @@ class SymptomController extends Controller
      */
     public function edit($symptom)
     {
-        return view('backend.doctor.symptom.edit', [
-            "symptom"   => Symptom::findorFail(decrypt($symptom)),
-        ]);
+        $symptom = Symptom::findorFail(decrypt($symptom));
+
+        $symptom->load('diseases');
+        $symptom->load('reasons');
+        $symptom->load('treatments');
+        
+        $diseases = Disease::get()->map(function($disease) use ($symptom) {
+            $disease->value = data_get($symptom->diseases->firstWhere('id', $disease->id), 'pivot.score') ?? null;
+            return $disease;
+        });
+
+        $reasons = Reason::get()->map(function($reason) use ($symptom) {
+            $reason->value = data_get($symptom->reasons->firstWhere('id', $reason->id), 'pivot') ?? null;
+            return $reason;
+        });
+
+        $treatments = Treatment::get()->map(function($treatment) use ($symptom) {
+            $treatment->value = data_get($symptom->treatments->firstWhere('id', $treatment->id), 'pivot') ?? null;
+            return $treatment;
+        });
+
+        return view('backend.doctor.symptom.edit', compact('symptom', 'diseases', 'reasons', 'treatments'));
     }
 
     /**
@@ -107,7 +126,17 @@ class SymptomController extends Controller
             'description'   => 'required'
         ]);
 
-        $hasil = Symptom::whereId($symptom)->update($validatedData);
+        $diseases = collect($request->input('diseases', []))
+            ->map(function($disease) {
+                return ['score' => $disease];
+            });        
+        $reasons = collect($request->input('reason', []));
+        $treatments = collect($request->input('treatment', []));
+
+        $hasil = Symptom::whereId($symptom)->first()->update($validatedData);
+        // $hasil->diseases()->sync($diseases);
+        $hasil->reasons()->sync($reasons);
+        $hasil->treatments()->sync($treatments);
 
         if ($hasil) {
             return redirect()->route('symptom.index')->with('success', 'Data penyakit berhasil diperbarui!');
@@ -131,5 +160,12 @@ class SymptomController extends Controller
             return redirect()->route('symptom.index')->with('success', 'Data penyakit berhasil dihapus!');
         }
         return redirect()->route('symptom.index')->with('error', 'Data penyakit gagal dihapus!');
+    }
+
+    public function mapDiseases($diseases)
+    {
+        return collect($diseases)->map(function ($i) {
+            return ['score' => $i];
+        });
     }
 }
