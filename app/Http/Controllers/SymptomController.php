@@ -93,7 +93,7 @@ class SymptomController extends Controller
         $symptom->load('diseases');
         $symptom->load('reasons');
         $symptom->load('treatments');
-        
+
         $diseases = Disease::get()->map(function($disease) use ($symptom) {
             $disease->value = data_get($symptom->diseases->firstWhere('id', $disease->id), 'pivot.score') ?? null;
             return $disease;
@@ -119,7 +119,7 @@ class SymptomController extends Controller
      * @param  \App\Models\symptom  $symptom
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $symptom)
+    public function update(Request $request, Symptom $symptom)
     {
         $validatedData = $request->validate([
             'name'          => 'required',
@@ -129,16 +129,16 @@ class SymptomController extends Controller
         $diseases = collect($request->input('diseases', []))
             ->map(function($disease) {
                 return ['score' => $disease];
-            });        
+        });
         $reasons = collect($request->input('reason', []));
         $treatments = collect($request->input('treatment', []));
 
-        $hasil = Symptom::whereId($symptom)->first()->update($validatedData);
-        // $hasil->diseases()->sync($diseases);
-        $hasil->reasons()->sync($reasons);
-        $hasil->treatments()->sync($treatments);
+        $symptom->update($validatedData);
+        $symptom->diseases()->sync($diseases);
+        $symptom->reasons()->sync($reasons);
+        $symptom->treatments()->sync($treatments);
 
-        if ($hasil) {
+        if ($symptom) {
             return redirect()->route('symptom.index')->with('success', 'Data penyakit berhasil diperbarui!');
         }
         return redirect()->route('symptom.index')->with('error', 'Data penyakit gagal diperbarui!');
@@ -160,12 +160,5 @@ class SymptomController extends Controller
             return redirect()->route('symptom.index')->with('success', 'Data penyakit berhasil dihapus!');
         }
         return redirect()->route('symptom.index')->with('error', 'Data penyakit gagal dihapus!');
-    }
-
-    public function mapDiseases($diseases)
-    {
-        return collect($diseases)->map(function ($i) {
-            return ['score' => $i];
-        });
     }
 }

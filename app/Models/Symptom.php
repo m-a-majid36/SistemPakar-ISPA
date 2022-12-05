@@ -9,12 +9,12 @@ class Symptom extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id'];
+    // protected $guarded = ['id'];
+    protected $fillable = ['id', 'name', 'description'];
 
     public function diseases()
     {
-        return $this->belongsToMany(Disease::class)
-            ->withPivot('score');
+        return $this->belongsToMany(Disease::class)->withPivot('score');
     }
 
     public function reasons()
