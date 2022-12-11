@@ -9,8 +9,7 @@ class Symptom extends Model
 {
     use HasFactory;
 
-    // protected $guarded = ['id'];
-    protected $fillable = ['id', 'name', 'description'];
+    protected $guarded = ['id'];
 
     public function diseases()
     {

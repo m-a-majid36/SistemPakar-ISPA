@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Disease;
+use App\Models\History;
 use App\Models\Regency;
 use App\Models\Symptom;
 use App\Models\Village;
@@ -24,9 +26,24 @@ class HomeController extends Controller
 
     public function diagnosis()
     {
-        $data = Frontend::whereId(1)->first();
+        if (Auth::user()) {
+            return view('frontend.diagnosis', [
+                'data'      => Frontend::whereId(1)->first(),
+                'history'   => History::where('user_id', Auth::user()->id),
+            ]);
+        } else {
+            return view('frontend.diagnosis', [
+                'data'      => Frontend::whereId(1)->first(),
+            ]);
+        }
+    }
 
-        return view('frontend.diagnosis', compact('data'));
+    public function diagnosis_create()
+    {
+        return view('frontend.diagnosis.create', [
+            'data'      => Frontend::whereId(1)->first(),
+            'diseases'  => Disease::all()
+        ]);
     }
 
     public function info()
@@ -39,15 +56,13 @@ class HomeController extends Controller
 
     public function profile()
     {
-        $user = Auth::user();
-
         return view('frontend.profile', [
             "data"      => Frontend::whereId(1)->first(),
-            "user"      => $user,
+            "user"      => Auth::user(),
             "provinces" => Province::all(),
-            "regencies" => Regency::where('province_id', $user->regency->province_id)->get(),
-            "districts" => District::where('regency_id', $user->district->regency_id)->get(),
-            "villages"  => Village::where('district_id', $user->village->district_id)->get()
+            "regencies" => Regency::where('province_id', Auth::user()->regency->province_id)->get(),
+            "districts" => District::where('regency_id', Auth::user()->district->regency_id)->get(),
+            "villages"  => Village::where('district_id', Auth::user()->village->district_id)->get()
         ]);
     }
 

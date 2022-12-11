@@ -21,7 +21,7 @@
                     <div class="card-body">
                         <h3>Data Penyakit</h3>
                         <a href="{{ route('symptom.create') }}" class="btn btn-success text-white"><i
-                                class="icon-user-follow"></i>&nbsp; Tambah Penyakit</a>
+                                class="fa-solid fa-file-circle-plus"></i>&nbsp; Tambah Penyakit</a>
                         <hr>
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered zero-configuration">

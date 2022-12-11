@@ -23,8 +23,8 @@ class DashboardController extends Controller
             return view('backend.dashboard', [
                 "total_akun"    => User::count(),
                 "total_pesan"   => Message::count(),
-                "total_gejala"  => Symptom::count(),
-                "total_penyakit"=> Disease::count(),
+                "total_penyakit"=> Symptom::count(),
+                "total_gejala"  => Disease::count(),
                 "total_riwayat" => History::count(),
             ]);
         } else {

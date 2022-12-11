@@ -42,18 +42,32 @@
                         <div class="tab-content">
                             @foreach ($symptoms as $symptom)
                                 <div class="tab-pane" id="tab-{{ $symptom->id }}">
-                                    <div class="row gy-4">
-                                        <div class="col-lg-8 details order-2 order-lg-1">
-                                            <h3>{{ $symptom->name }}</h3>
-                                            <p class="fst-italic">{{ $symptom->description }}</p>
-                                            <p> Gejala
-                                                Gejala
-                                                Gejala
-                                                Gejala
-                                            </p>
+                                    <div class="row details order-2 order-lg-1">
+                                        <h3>{{ $symptom->name }}</h3>
+                                        <p class="fst-italic">{{ $symptom->description }}</p>
+                                        <div class="col-lg-4">
+                                            <h5 class="mb-0 pb-0">Gejala :</h5>
+                                            <ul>
+                                                @foreach ($symptom->diseases as $disease)
+                                                    <li class="m-0 p-0">{{ $disease->name }}</li>
+                                                @endforeach
+                                            </ul>
                                         </div>
-                                        <div class="col-lg-4 text-center order-1 order-lg-2">
-                                            <img src="assets/img/departments-1.jpg" alt="" class="img-fluid">
+                                        <div class="col-lg-4">
+                                            <h5 class="mb-0 pb-0">Penyebab :</h5>
+                                            <ul>
+                                                @foreach ($symptom->reasons as $reason)
+                                                    <li class="m-0 p-0">{{ $reason->name }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <h5 class="mb-0 pb-0">Perawatan :</h5>
+                                            <ul>
+                                                @foreach ($symptom->treatments as $treatment)
+                                                    <li class="m-0 p-0">{{ $treatment->name }}</li>
+                                                @endforeach
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -66,4 +80,7 @@
         </section><!-- End Departments Section -->
 
     </main><!-- End #main -->
+@endsection
+@section('script')
+    <script></script>
 @endsection

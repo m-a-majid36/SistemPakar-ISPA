@@ -57,7 +57,8 @@ Route::middleware('auth', 'role:pasien')->group(function() {
         Route::post('/getvillages', [HomeController::class, 'get_villages'])->name('home.get.villages');
     });
 
-    Route::resource('diagnosis', DiagnosisController::class)->except('index');
+    Route::get('/diagnosis/create', [HomeController::class, 'diagnosis_create'])->name('diagnosis.create');
+
 });
 
 Route::get('logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
