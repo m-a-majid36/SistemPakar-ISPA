@@ -18,7 +18,7 @@ class SymptomController extends Controller
     public function index()
     {
         return view('backend.doctor.symptom.index', [
-            "symptoms"  => Symptom::all(),
+            "symptoms"  => Symptom::latest()->get(),
         ]);
     }
 

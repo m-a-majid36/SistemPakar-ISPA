@@ -15,12 +15,8 @@ class CreateHistoriesTable extends Migration
     {
         Schema::create('histories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')
-                ->constrained()
-                ->cascadeOnDelete();
-            $table->foreignId('symptom_id')
-                ->constrained()
-                ->cascadeOnDelete();
+            $table->foreignId('user_id');
+            $table->foreignId('symptom_id');
             $table->timestamps();
         });
     }

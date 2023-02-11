@@ -12,6 +12,7 @@ use App\Models\District;
 use App\Models\Frontend;
 use App\Models\Province;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -29,7 +30,7 @@ class HomeController extends Controller
         if (Auth::user()) {
             return view('frontend.diagnosis', [
                 'data'      => Frontend::whereId(1)->first(),
-                'history'   => History::where('user_id', Auth::user()->id),
+                'histories' => History::where('user_id', Auth::user()->id)->latest()->get(),
             ]);
         } else {
             return view('frontend.diagnosis', [
@@ -44,6 +45,134 @@ class HomeController extends Controller
             'data'      => Frontend::whereId(1)->first(),
             'diseases'  => Disease::all()
         ]);
+    }
+
+    public function findPEH($symptom, $inputDiseases)
+    {
+        $PEH = array();
+            foreach ($symptom->diseases as $disease) {
+                foreach ($inputDiseases as $inputDisease) {
+                    if ($disease->id == $inputDisease) {
+                        $PEH[] = $disease->pivot->score;
+                    }
+                }
+            }
+        return $PEH;
+    }
+
+    public function findNS($PEH)
+    {
+        $Nilai_Semesta = 0;
+        foreach ($PEH as $NS) {
+            $Nilai_Semesta += $NS;
+        }
+
+        return $Nilai_Semesta;
+    }
+
+    public function findPH($PEH, $Nilai_Semesta, $ni)
+    {
+        $PH = array_fill(0, $ni, 0);
+        for ($i = 0; $i < $ni; $i++) {
+            $PH[$i] = $PEH[$i] / $Nilai_Semesta;
+        }
+        return $PH;
+    }
+
+    public function findH($PH, $PEH, $ni)
+    {
+        $H = 0;
+        $Hi = array_fill(0, $ni, 0);
+
+        for ($i = 0; $i < $ni; $i++) {
+            $Hi[$i] = $PH[$i] * $PEH[$i];
+        }
+
+        foreach ($Hi as $Hin) {
+            $H += $Hin;
+        }
+
+        return $H;
+    }
+
+    public function findPHE($PH, $PEH, $H, $ni)
+    {
+        $PHE = array_fill(0, $ni, 0);
+        for ($i=0; $i<$ni; $i++) {
+            $PHE[$i] = ($PH[$i] * $PEH[$i]) / $H;
+        }
+        return $PHE;
+    }
+
+    public function findBi($PHE, $PEH, $ni)
+    {
+        $Bi = array_fill(0, $ni, 0);
+        for ($i=0; $i<$ni; $i++) {
+            $Bi[$i] = $PHE[$i] * $PEH[$i];
+        }
+        return $Bi;
+    }
+
+    public function findBn($Bi)
+    {
+        $Bn = 0;
+        foreach ($Bi as $Bin) {
+            $Bn += $Bin;
+        }
+        return $Bn;
+    }
+
+    public function findBayes($symptoms, $inputDiseases)
+    {
+        $Bayes = array();
+        foreach ($symptoms as $symptom) {
+            $PEH            = $this->findPEH($symptom, $inputDiseases); //Array score gejala
+            $Nilai_Semesta  = $this->findNS($PEH); //Nilai Semesta
+            $ni             = count($PEH); //Jumlah gejala yg sesuai
+            $PH             = $this->findPH($PEH, $Nilai_Semesta, $ni); //Array nilai PHi
+            $H              = $this->findH($PH, $PEH, $ni); //Array nilai H
+            $PHE            = $this->findPHE($PH, $PEH, $H, $ni); //Array nilai PHE
+            $Bi             = $this->findBi($PHE, $PEH, $ni); //Array nilai Bi
+            $Bn             = $this->findBn($Bi); //Total B suatu penyakit
+            $symptom_id     = $symptom->id; //Id penyakit
+            
+            $Bayes[$symptom_id] = $Bn;
+        }
+
+        return $Bayes;
+    }
+
+    public function findHasil($Bayes)
+    {
+        $Hasil = 0;
+        $largest = 0;
+        foreach ($Bayes as $symptom_id => $nilaiBayes) {
+            if ($nilaiBayes > $largest) {
+                $largest = $nilaiBayes;
+                $Hasil = $symptom_id;
+            }
+        }
+
+        return $Hasil;
+    }
+
+    public function diagnosis_store(Request $request)
+    {
+        $symptoms = Symptom::all(); //Penyakit
+        $inputDiseases = collect($request->input('disease', [])); //Array id disease yg dipilih
+        $Bayes = $this->findBayes($symptoms, $inputDiseases); //Array asosiatif id penyakit => nilai bayes
+        $Hasil = $this->findHasil($Bayes);
+
+        $validatedData['user_id'] = Auth::user()->id;
+        $validatedData['symptom_id'] = $Hasil;
+
+        $history = History::create($validatedData);
+        $history->diseases()->sync($inputDiseases);
+
+        if ($history) {
+            return redirect()->route('diagnosis')->with('success', 'Diagnosa berhasil dibuat!');
+        }
+        return redirect()->route('diagnosis')->with('error', 'Diagnosa gagal dibuat!');
     }
 
     public function info()

@@ -25,4 +25,9 @@ class Symptom extends Model
     {
         return $this->belongsToMany(Treatment::class);
     }
+
+    public function histories()
+    {
+        return $this->hasMany(History::class);
+    }
 }

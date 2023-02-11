@@ -60,8 +60,8 @@ class User extends Authenticatable
         return $this->belongsTo(Village::class);
     }
 
-    // public function history()
-    // {
-    //     return $this->belongsTo(History::class);
-    // }
+    public function histories()
+    {
+        return $this->hasMany(History::class);
+    }
 }

@@ -49,8 +49,8 @@
                     </a>
                 </li>
                 <li class="nav-label">Riwayat</li>
-                <li>
-                    <a href="#" aria-expanded="false">
+                <li class="{{ Request::is('dashboard/history*') ? 'active' : '' }}">
+                    <a href="{{ route('history.index') }}" aria-expanded="false">
                         <i class="icon-book-open menu-icon"></i><span class="nav-text">Riwayat Pasien</span>
                     </a>
                 </li>

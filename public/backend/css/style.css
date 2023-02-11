@@ -11003,7 +11003,7 @@ table.dataTable thead .sorting::after {
     padding: 0;
     background: transparent;
     font-size: 0.875rem;
-    float: right; }
+    float: left; }
     .page-titles .breadcrumb li {
       margin-top: 0;
       margin-bottom: 0; }

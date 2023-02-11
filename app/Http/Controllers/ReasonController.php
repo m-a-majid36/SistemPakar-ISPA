@@ -15,7 +15,7 @@ class ReasonController extends Controller
     public function index()
     {
         return view('backend.doctor.reason.index', [
-            "reasons" => Reason::all(),
+            "reasons" => Reason::latest()->get(),
         ]);
     }
 

@@ -15,4 +15,14 @@ class History extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function symptom()
+    {
+        return $this->belongsTo(Symptom::class);
+    }
+
+    public function diseases()
+    {
+        return $this->belongsToMany(Disease::class);
+    }
 }

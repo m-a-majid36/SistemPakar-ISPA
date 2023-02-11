@@ -15,7 +15,7 @@ class TreatmentController extends Controller
     public function index()
     {
         return view('backend.doctor.treatment.index', [
-            "treatments" => Treatment::all()
+            "treatments" => Treatment::latest()->get()
         ]);
     }
 

@@ -2,7 +2,6 @@
 @section('title', 'Konsultasi')
 @section('content')
     <main id="main">
-
         <!-- ======= Breadcrumbs Section ======= -->
         <section class="breadcrumbs">
             <div class="container">
@@ -102,49 +101,60 @@
                             </div>
                         </div>
                         <div class="section-title">
-                            <h4 class="mb-0 mt-3">Riwayat Diagnosa</h4>
+                            <h4 class="mt-3">Riwayat Diagnosa</h4>
+                            <a href="{{ route('diagnosis.create') }}" class="mt-3 btn btn-success"><i
+                                    class="fa-solid fa-plus"></i>&nbsp; Tambah Diagnosa</a>
                         </div>
-                        <a href="{{ route('diagnosis.create') }}" class="mb-2 mt-0 btn btn-success"><i
-                                class="fa-solid fa-plus"></i> Tambah Diagnosa</a>
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered zero-configuration">
                                 <thead>
-                                    <tr class="text-center">
+                                    <tr class="text-center" style="vertical-align: middle">
                                         <th width="1">No.</th>
+                                        <th>Tanggal Diagnosa</th>
                                         <th>Gejala</th>
-                                        <th>Hasil Diagnosa</th>
-                                        <th>Penyebab</th>
-                                        <th>Perawatan</th>
+                                        <th>Penyakit Hasil Diagnosa</th>
                                     </tr>
                                 </thead>
-                                {{-- @if ($history->count()) --}}
-                                <tbody>
-
-                                    <tr>
-                                        {{-- <th class="text-center" style="vertical-align: middle">
+                                @if ($histories->count())
+                                    <tbody>
+                                        @foreach ($histories as $history)
+                                            <tr>
+                                                <th class="text-center" style="vertical-align: middle">
                                                     {{ $loop->iteration }}
-                                                </th> --}}
-                                        <td>1</td>
-                                        <td>Kosong</td>
-                                        <td>x</td>
-                                        <td>x</td>
-                                        <td>x</td>
-                                    </tr>
-
-                                </tbody>
-                                {{-- @endif --}}
+                                                </th>
+                                                <td class="text-center" style="vertical-align: middle">
+                                                    {{ date('d-m-Y', strtotime($history->created_at)) }}
+                                                </td>
+                                                <td>
+                                                    <ul>
+                                                        <hr class="my-2 p-0">
+                                                        @foreach ($history->diseases as $disease)
+                                                            <li>
+                                                                {{ $disease->name }}
+                                                                <hr class="my-2 p-0">
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </td>
+                                                <td class="text-center" style="vertical-align: middle">
+                                                    <strong>{{ $history->symptom->name }}</strong>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                @endif
                             </table>
-                            {{-- @if (!$history->count()) --}}
-                            {{-- <table class="table table-bordered" style="margin-top: -17px">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center">
-                                            Tidak ada Data
-                                        </th>
-                                    </tr>
-                                </thead>
-                            </table> --}}
-                            {{-- @endif --}}
+                            @if (!$histories->count())
+                                <table class="table table-bordered" style="margin-top: -17px">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">
+                                                Tidak ada Data
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            @endif
                         </div>
                     @else
                         <div class="row text-center">
@@ -160,4 +170,18 @@
         </section>
 
     </main><!-- End #main -->
+@endsection
+@section('script')
+    <script src="{{ asset('backend/plugins/tables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('backend/plugins/tables/js/datatable/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('backend/plugins/tables/js/datatable-init/datatable-basic.min.js') }}"></script>
+    <script src="{{ asset('backend/plugins/toastr/js/toastr.min.js') }}"></script>
+    <script src="{{ asset('backend/plugins/toastr/js/toastr.init.js') }}"></script>
+    <script>
+        @if (Session::has('success'))
+            toastr.success("{{ Session::get('success') }}")
+        @elseif (Session::has('error'))
+            toastr.error("{{ Session::get('error') }}")
+        @endif
+    </script>
 @endsection

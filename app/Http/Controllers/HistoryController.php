@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\History;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HistoryController extends Controller
@@ -14,28 +15,9 @@ class HistoryController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        return view('backend.doctor.history.index', [
+            "histories" => History::latest()->get(),
+        ]);
     }
 
     /**
@@ -44,32 +26,12 @@ class HistoryController extends Controller
      * @param  \App\Models\History  $history
      * @return \Illuminate\Http\Response
      */
-    public function show(History $history)
+    public function show($history)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\History  $history
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(History $history)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\History  $history
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, History $history)
-    {
-        //
+        return view('backend.doctor.history.show', [
+            "user"      => User::findOrFail(decrypt($history)),
+            "histories" => History::where('user_id', decrypt($history))->latest()->get(),
+        ]);
     }
 
     /**
@@ -78,8 +40,15 @@ class HistoryController extends Controller
      * @param  \App\Models\History  $history
      * @return \Illuminate\Http\Response
      */
-    public function destroy(History $history)
+    public function destroy($history)
     {
-        //
+        $data = History::findorFail($history);
+
+        $hasil = $data->delete();
+
+        if ($hasil) {
+            return redirect()->route('history.index')->with('success', 'Riwayat diagnosa berhasil dihapus!');
+        }
+        return redirect()->route('history.index')->with('error', 'Riwayat diagnosa gagal dihapus!');
     }
 }

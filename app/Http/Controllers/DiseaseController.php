@@ -15,7 +15,7 @@ class DiseaseController extends Controller
     public function index()
     {
         return view('backend.doctor.disease.index', [
-            "diseases" => Disease::all(),
+            "diseases" => Disease::latest()->get(),
         ]);
     }
 

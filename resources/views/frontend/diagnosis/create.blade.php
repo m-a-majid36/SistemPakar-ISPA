@@ -21,21 +21,19 @@
                     <h2 class="mb-0">Pilih Gejala<br>Yang Dirasakan</h2>
                 </div>
                 <div class="row">
-                    <form action="" class="select-form" method="POST">
+                    <form action="{{ route('diagnosis.store') }}" class="select-form" method="POST">
                         @csrf
-
                         <div class="row">
                             @foreach ($diseases as $disease)
                                 <div class="inputGroup col-md-6">
                                     <input type="checkbox" value="{{ $disease->id }}" name="disease[{{ $disease->id }}]"
-                                        id="disease[{{ $disease->id }}]">
+                                        id="disease[{{ $disease->id }}]" class="disease-enable">
                                     <label for="disease[{{ $disease->id }}]">{{ $disease->name }}</label>
                                 </div>
                             @endforeach
                         </div>
-
                         <div class="text-center mt-3">
-                            <button type="submit" class="btn">Masukkan Data</button>
+                            <button type="submit" id="btn" disabled class="btn">Masukkan Data</button>
                         </div>
                     </form>
                 </div>
@@ -44,5 +42,9 @@
     </main>
 @endsection
 @section('script')
-
+    <script>
+        $(".disease-enable").on('change', function() {
+            $(".btn").prop('disabled', !$(".disease-enable:checked").length);
+        })
+    </script>
 @endsection
