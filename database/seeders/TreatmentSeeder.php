@@ -15,54 +15,22 @@ class TreatmentSeeder extends Seeder
     public function run()
     {
         $treatment = [
-            [
-                'name'  => 'Banyak istirahat'
-            ],
-            [
-                'name'  => 'Cairan ekstra'
-            ],
-            [
-                'name'  => 'Dekongestan atau semprotan hidung (obat untuk menghilangkan gejala)'
-            ],
-            [
-                'name'  => 'Diet sehat'
-            ],
-            [
-                'name'  => 'Makan sup atau minum hangat'
-            ],
-            [
-                'name'  => 'Obat penghilang rasa sakit seperti ibuprofen atau parasetamol'
-            ],
-            [
-                'name'  => 'Obat kumur'
-            ],
-            [
-                'name'  => 'Obat pelega tenggorokan atau tenggorokan'
-            ],
-            [
-                'name'  => 'Inhalasi uap'
-            ],
-            [
-                'name'  => 'Bilas hidung saline'
-            ],
-            [
-                'name'  => 'Istirahat vokal'
-            ],
-            [
-                'name'  => 'Menggunakan penyaring udara di rumah Anda'
-            ],
-            [
-                'name'  => 'Hindari merokok dan alkohol'
-            ],
-            [
-                'name'  => 'Antihistamin'
-            ],
-            [
-                'name'  => 'Penghindaran alergen'
-            ],
-            [
-                'name'  => 'Nasal douche'
-            ],
+            ['name' =>	'Tirah baring / istirahat (bed rest)'],
+            ['name' =>	'Pemasukan salin steril melalui hidung'],
+            ['name' =>	'Tetes hidung (paling baik digunakan 15-20 menit sebelum makan dan sebelum tidur 1-2 tetes setiap lubang hidung)'],
+            ['name' =>	'Obat peroral (obat minum) dengan Pensilin 3x1 hari selama 10 hari untuk mengurangi nyeri tenggorokan'],
+            ['name' =>	'Minum cairan jahe hangat'],
+            ['name' =>	'Terapi croup di Rumah #akit'],
+            ['name' =>	'Menghindari udara malam'],
+            ['name' =>	'Melakukan pemeriksaan ke dokter'],
+            ['name' =>	'Dilarang telentang karena risiko bertambahnya agitasi'],
+            ['name' =>	'Pemberian vaksin Pneumonia'],
+            ['name' =>	'Perbanyak istirahat'],
+            ['name' =>	'Berkumur dengan air garam hangat'],
+            ['name' =>	'Menggunakan penghilang rasa sakit seperti Acetaminophen'],
+            ['name' =>	'Minum air hangat'],
+            ['name' =>	'Kurangi minuman dingin'],
+            ['name' =>	'Pemberian vaksin Difteri'],
         ];
 
         foreach ($treatment as $data) {

@@ -16,49 +16,41 @@ class ReasonSeeder extends Seeder
     {
         $reason = [
             [
-                'name'      => 'Rhinovirus',
-                'category'  => 'V'
+                'name'	=>	'Influenza',
+                'category'	=>	'V'
             ],
             [
-                'name'      => 'Adenovirus',
-                'category'  => 'V'
+                'name'	=>	'Adenovirus',
+                'category'	=>	'V'
             ],
             [
-                'name'      => 'Coxsackievirus',
-                'category'  => 'V'
+                'name'	=>	'Rhinovirus',
+                'category'	=>	'V'
             ],
             [
-                'name'      => 'Parainfluenza',
-                'category'  => 'V'
+                'name'	=>	'SARS-CoV-2 (Corona atau COVID-19)',
+                'category'	=>	'V'
             ],
             [
-                'name'      => 'Sinsitium saluran pernapasan',
-                'category'  => 'V'
+                'name'	=>	'Epstein-Barr',
+                'category'	=>	'V'
             ],
             [
-                'name'      => 'Metapneumovirus',
-                'category'  => 'V'
+                'name'	=>	'Streptococcus pneumoniae',
+                'category'	=>	'B'
             ],
             [
-                'name'      => 'Streptokokus beta-hemolitik kelompok A',
-                'category'  => 'B'
+                'name'	=>	'Haemophilus influenzae tipe B (Hib)',
+                'category'	=>	'B'
             ],
             [
-                'name'      => 'Streptokokus beta-hemolitik kelompok C',
-                'category'  => 'B'
+                'name'	=>	'Mycoplasma pneumonia',
+                'category'	=>	'B'
             ],
             [
-                'name'      => 'Corynebacterium diphtheriae (diphtheria)',
-                'category'  => 'B'
-            ],
-            [
-                'name'      => 'Neisseria gonorrhoeae (gonore)',
-                'category'  => 'B'
-            ],
-            [
-                'name'      => 'Chlamydia pneumoniae (chlamydia)',
-                'category'  => 'B'
-            ],
+                'name'	=>	'Corynebacterium diphtheria',
+                'category'	=>	'B'
+            ],            
         ];
 
         foreach ($reason as $data) {
