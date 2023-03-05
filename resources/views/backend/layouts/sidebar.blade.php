@@ -14,7 +14,7 @@
             @if (Auth::user()->role == 'admin')
                 <li class="{{ Request::is('dashboard/homesetting*') ? 'active' : '' }}">
                     <a href="{{ route('home.setting') }}" aria-expanded="false">
-                        <i class="icon-home menu-icon"></i><span class="nav-text">Pengaturan Home</span>
+                        <i class="icon-home menu-icon"></i><span class="nav-text">Pengaturan Beranda</span>
                     </a>
                 </li>
                 <li class="{{ Request::is('dashboard/user*') ? 'active' : '' }}">
