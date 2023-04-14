@@ -83,7 +83,6 @@
                                         <th>Tanggal Diagnosa</th>
                                         <th>Gejala yang dialami</th>
                                         <th>Diagnosa Penyakit</th>
-                                        <th width="55">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -110,13 +109,7 @@
                                                     <strong>{{ $history->symptom->name }}</strong>
                                                 </span>
                                             </td>
-                                            <td class="text-center">
-                                                <button type="button" class="btn btn-danger my-1" data-toggle="modal"
-                                                    data-target="#delete{{ $history->id }}"><i class="icon-trash"></i>
-                                                </button>
-                                            </td>
                                         </tr>
-                                        @include('backend.doctor.history.modal')
                                     @endforeach
                                 </tbody>
                             </table>

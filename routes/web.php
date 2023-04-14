@@ -74,12 +74,12 @@ Route::prefix('dashboard')->middleware('auth')
             Route::post('/profile/getregencies', [DashboardController::class, 'get_regencies'])->name('dashboard.get.regencies');
             Route::post('/profile/getdistricts', [DashboardController::class, 'get_districts'])->name('dashboard.get.districts');
             Route::post('/profile/getvillages', [DashboardController::class, 'get_villages'])->name('dashboard.get.villages');
+
+            Route::resource('message', MessageController::class)->except(['create', 'store', 'show', 'edit', 'update']);
         });
         Route::group(['middleware' => ['role:admin']], function() {
             Route::get('/homesetting', [FrontendController::class, 'index'])->name('home.setting');
             Route::put('/homesetting', [FrontendController::class, 'update'])->name('home.action');
-
-            Route::resource('message', MessageController::class)->except(['create', 'store', 'show', 'edit', 'update']);
 
             Route::resource('user', UserController::class);
             Route::prefix('user')->group(function() {
@@ -94,6 +94,6 @@ Route::prefix('dashboard')->middleware('auth')
             Route::resource('symptom', SymptomController::class);
             Route::resource('treatment', TreatmentController::class);
             Route::resource('reason', ReasonController::class);
-            Route::resource('history', HistoryController::class)->except(['create', 'store', 'edit', 'update']);
+            Route::resource('history', HistoryController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
         });
 });

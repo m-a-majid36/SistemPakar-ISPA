@@ -29,7 +29,7 @@
                                         <th>Email</th>
                                         <th>Subjek</th>
                                         <th>Pesan</th>
-                                        <th>Aksi</th>
+                                        <th class="text-center" width="150">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>

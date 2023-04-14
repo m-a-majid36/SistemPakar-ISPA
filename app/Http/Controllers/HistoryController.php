@@ -33,22 +33,4 @@ class HistoryController extends Controller
             "histories" => History::where('user_id', decrypt($history))->latest()->get(),
         ]);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\History  $history
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($history)
-    {
-        $data = History::findorFail($history);
-
-        $hasil = $data->delete();
-
-        if ($hasil) {
-            return redirect()->route('history.index')->with('success', 'Riwayat diagnosa berhasil dihapus!');
-        }
-        return redirect()->route('history.index')->with('error', 'Riwayat diagnosa gagal dihapus!');
-    }
 }

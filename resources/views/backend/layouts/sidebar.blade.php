@@ -11,23 +11,7 @@
                 </a>
             </li>
             <li class="nav-label">Data Master</li>
-            @if (Auth::user()->role == 'admin')
-                <li class="{{ Request::is('dashboard/homesetting*') ? 'active' : '' }}">
-                    <a href="{{ route('home.setting') }}" aria-expanded="false">
-                        <i class="icon-home menu-icon"></i><span class="nav-text">Pengaturan Beranda</span>
-                    </a>
-                </li>
-                <li class="{{ Request::is('dashboard/user*') ? 'active' : '' }}">
-                    <a href="{{ route('user.index') }}" aria-expanded="false">
-                        <i class="icon-user menu-icon"></i><span class="nav-text">Pengaturan Pengguna</span>
-                    </a>
-                </li>
-                <li class="{{ Request::is('dashboard/message*') ? 'active' : '' }}">
-                    <a href="{{ route('message.index') }}" aria-expanded="false">
-                        <i class="icon-speech menu-icon"></i><span class="nav-text">Pesan</span>
-                    </a>
-                </li>
-            @elseif (Auth::user()->role == 'dokter')
+            @if (Auth::user()->role == 'dokter')
                 <li class="{{ Request::is('dashboard/symptom*') ? 'active' : '' }}">
                     <a href="{{ route('symptom.index') }}" aria-expanded="false">
                         <i class="fa-solid fa-lungs-virus"></i><span class="nav-text">Penyakit</span>
@@ -54,7 +38,26 @@
                         <i class="icon-book-open menu-icon"></i><span class="nav-text">Riwayat Pasien</span>
                     </a>
                 </li>
+            @elseif (Auth::user()->role == 'admin')
+                <li class="{{ Request::is('dashboard/homesetting*') ? 'active' : '' }}">
+                    <a href="{{ route('home.setting') }}" aria-expanded="false">
+                        <i class="icon-home menu-icon"></i><span class="nav-text">Pengaturan Beranda</span>
+                    </a>
+                </li>
+                <li class="{{ Request::is('dashboard/user*') ? 'active' : '' }}">
+                    <a href="{{ route('user.index') }}" aria-expanded="false">
+                        <i class="icon-user menu-icon"></i><span class="nav-text">Pengaturan Pengguna</span>
+                    </a>
+                </li>
             @endif
+            @if (Auth::user()->role == 'dokter')
+                <li class="nav-label">Pesan</li>
+            @endif
+            <li class="{{ Request::is('dashboard/message*') ? 'active' : '' }}">
+                <a href="{{ route('message.index') }}" aria-expanded="false">
+                    <i class="icon-speech menu-icon"></i><span class="nav-text">Pesan</span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

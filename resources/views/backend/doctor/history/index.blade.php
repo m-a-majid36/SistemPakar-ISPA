@@ -65,12 +65,8 @@
                                             <td class="text-center">
                                                 <a href="{{ route('history.show', ['history' => encrypt($history->user->id)]) }}"
                                                     class="btn btn-info my-1"><i class="icon-eye"></i></a>
-                                                <button type="button" class="btn btn-danger my-1" data-toggle="modal"
-                                                    data-target="#delete{{ $history->id }}"><i
-                                                        class="icon-trash"></i></button>
                                             </td>
                                         </tr>
-                                        @include('backend.doctor.history.modal')
                                     @endforeach
                                 </tbody>
                             </table>
